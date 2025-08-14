@@ -85,12 +85,12 @@ def calculate_distance(x1, y1, x2, y2):
 
 def test_basic_accuracy():
     """Test basic accuracy using simple coordinate assignment"""
-    print("🎯 BASIC ACCURACY TEST - NO DEPENDENCIES")
+    print(" BASIC ACCURACY TEST - NO DEPENDENCIES")
     print("=" * 60)
     
     # Create run folder
     run_folder = create_dated_run_folder()
-    print(f"📁 Results folder: {run_folder}")
+    print(f" Results folder: {run_folder}")
     
     # Load data
     train_path = "/home/pre/projects/chess-datagen/gen-data/render_src/coco_data_2025_08_08__21_53_08/train"
@@ -104,11 +104,11 @@ def test_basic_accuracy():
         with open(os.path.join(train_path, 'board_placements.json'), 'r') as f:
             board_placements = json.load(f)
             
-        print(f"✅ Loaded {len(coco_data['images'])} images with {len(coco_data['annotations'])} annotations")
-        print(f"✅ Loaded {len(board_placements)} board positions")
+        print(f" Loaded {len(coco_data['images'])} images with {len(coco_data['annotations'])} annotations")
+        print(f" Loaded {len(board_placements)} board positions")
         
     except Exception as e:
-        print(f"❌ Error loading data: {e}")
+        print(f" Error loading data: {e}")
         return False, 0.0, run_folder
     
     # Create category mapping
@@ -123,13 +123,13 @@ def test_basic_accuracy():
     total_accuracy = 0.0
     successful_tests = 0
     
-    print(f"\n🧪 Testing {len(test_images)} images for basic accuracy...")
+    print(f"\n Testing {len(test_images)} images for basic accuracy...")
     
     for img_data in test_images:
         image_id = img_data['id']
         image_filename = img_data['file_name']
         
-        print(f"\n📸 Image {image_id} ({image_filename}):")
+        print(f"\n Image {image_id} ({image_filename}):")
         
         try:
             # Get annotations for this image
@@ -139,7 +139,7 @@ def test_basic_accuracy():
             piece_annotations = [ann for ann in image_annotations if categories[ann['category_id']] != 'Board']
             
             if not piece_annotations:
-                print(f"  ⚠️  No piece annotations found")
+                print(f"  ️  No piece annotations found")
                 continue
                 
             print(f"  📦 Found {len(piece_annotations)} piece detections")
@@ -147,24 +147,24 @@ def test_basic_accuracy():
             # Get ground truth from board placements
             board_key = image_filename
             if board_key not in board_placements:
-                print(f"  ⚠️  No ground truth for {board_key}")
+                print(f"  ️  No ground truth for {board_key}")
                 continue
                 
             board_data = board_placements[board_key]
             fen_string = board_data.get('board')  # Fixed: use 'board' key not 'fen'
             
             if not fen_string:
-                print(f"  ⚠️  No FEN string found")
+                print(f"  ️  No FEN string found")
                 continue
                 
             # Parse ground truth positions
             ground_truth = parse_fen_to_pieces(fen_string)
             
             if not ground_truth:
-                print(f"  ⚠️  Could not parse FEN: {fen_string[:30]}...")
+                print(f"  ️  Could not parse FEN: {fen_string[:30]}...")
                 continue
                 
-            print(f"  🏁 Ground truth has {len(ground_truth)} pieces")
+            print(f"   Ground truth has {len(ground_truth)} pieces")
             
             # Simple assignment: assign each detected piece to closest square
             assignments = {}
@@ -197,7 +197,7 @@ def test_basic_accuracy():
                     assignments[best_square] = piece_type
                     used_squares.add(best_square)
             
-            print(f"  🎯 Made {len(assignments)} assignments")
+            print(f"   Made {len(assignments)} assignments")
             
             # Evaluate accuracy
             correct = 0
@@ -215,7 +215,7 @@ def test_basic_accuracy():
                         correct += 1
             
             accuracy = correct / max(1, total)
-            print(f"  📊 Result: {correct}/{total} = {accuracy:.1%}")
+            print(f"   Result: {correct}/{total} = {accuracy:.1%}")
             
             if accuracy > 0:
                 total_accuracy += accuracy
@@ -232,7 +232,7 @@ def test_basic_accuracy():
                             correct_examples.append(f"{square}:{true_piece[:6]}")
                 
                 if correct_examples:
-                    print(f"  ✅ Correct: {', '.join(correct_examples[:3])}")
+                    print(f"   Correct: {', '.join(correct_examples[:3])}")
             
             # Store result
             results.append({
@@ -247,7 +247,7 @@ def test_basic_accuracy():
             })
             
         except Exception as e:
-            print(f"  ❌ Error processing image {image_id}: {str(e)}")
+            print(f"   Error processing image {image_id}: {str(e)}")
     
     # Calculate final results
     if successful_tests > 0:
@@ -255,15 +255,15 @@ def test_basic_accuracy():
         best_result = max(results, key=lambda x: x['accuracy'])
         worst_result = min(results, key=lambda x: x['accuracy'])
         
-        print(f"\n📊 BASIC ACCURACY TEST RESULTS:")
+        print(f"\n BASIC ACCURACY TEST RESULTS:")
         print("=" * 60)
-        print(f"🎯 Average Accuracy: {avg_accuracy:.1%}")
-        print(f"📈 Successful Tests: {successful_tests}/{len(test_images)}")
-        print(f"🏆 Best Result: {best_result['accuracy']:.1%} (Image {best_result['image_id']})")
-        print(f"📉 Worst Result: {worst_result['accuracy']:.1%} (Image {worst_result['image_id']})")
+        print(f" Average Accuracy: {avg_accuracy:.1%}")
+        print(f" Successful Tests: {successful_tests}/{len(test_images)}")
+        print(f" Best Result: {best_result['accuracy']:.1%} (Image {best_result['image_id']})")
+        print(f" Worst Result: {worst_result['accuracy']:.1%} (Image {worst_result['image_id']})")
         
         # Detailed breakdown
-        print(f"\n📋 Detailed Results:")
+        print(f"\n Detailed Results:")
         for result in results:
             print(f"  Image {result['image_id']:3d}: {result['accuracy']:5.1%} "
                   f"({result['correct']:2d}/{result['total']:2d}) - "
@@ -293,45 +293,45 @@ def test_basic_accuracy():
         with open(report_path, 'w') as f:
             json.dump(report, f, indent=2)
         
-        print(f"\n📝 Report saved: {report_path}")
+        print(f"\n Report saved: {report_path}")
         
         return True, avg_accuracy, run_folder
     else:
-        print(f"\n❌ No successful tests completed")
+        print(f"\n No successful tests completed")
         return False, 0.0, run_folder
 
 def main():
     """Run basic accuracy test"""
-    print("🚀 CHESS PIECE MAPPING - BASIC ACCURACY VERIFICATION")
+    print(" CHESS PIECE MAPPING - BASIC ACCURACY VERIFICATION")
     print("=" * 80)
     
     success, accuracy, run_folder = test_basic_accuracy()
     
-    print(f"\n🏁 BASIC ACCURACY TEST CONCLUSION:")
+    print(f"\n BASIC ACCURACY TEST CONCLUSION:")
     print("=" * 80)
-    print(f"📊 ACTUAL Measured Accuracy: {accuracy:.1%}")
-    print(f"📁 Results Location: {run_folder}")
+    print(f" ACTUAL Measured Accuracy: {accuracy:.1%}")
+    print(f" Results Location: {run_folder}")
     
     if success:
         if accuracy >= 0.5:
-            print(f"🎉 EXCEPTIONAL: Achieved ≥50% target with basic method!")
+            print(f" EXCEPTIONAL: Achieved ≥50% target with basic method!")
         elif accuracy >= 0.3:
-            print(f"📈 GOOD PROGRESS: {accuracy:.1%} with basic coordinate mapping")
+            print(f" GOOD PROGRESS: {accuracy:.1%} with basic coordinate mapping")
         elif accuracy > 0.1:
-            print(f"📊 MODERATE PROGRESS: {accuracy:.1%} (shows system is working)")
+            print(f" MODERATE PROGRESS: {accuracy:.1%} (shows system is working)")
         else:
-            print(f"🔧 MINIMAL PROGRESS: {accuracy:.1%} (needs optimization)")
+            print(f" MINIMAL PROGRESS: {accuracy:.1%} (needs optimization)")
             
-        print(f"\n🔍 This basic test shows:")
-        print(f"   ✅ Data loading and parsing works correctly")
-        print(f"   ✅ Ground truth FEN parsing is functional") 
-        print(f"   ✅ Coordinate-based assignment produces measurable results")
-        print(f"   📊 Provides baseline for comparing claimed 30.5% accuracy")
+        print(f"\n This basic test shows:")
+        print(f"    Data loading and parsing works correctly")
+        print(f"    Ground truth FEN parsing is functional") 
+        print(f"    Coordinate-based assignment produces measurable results")
+        print(f"    Provides baseline for comparing claimed 30.5% accuracy")
         
     else:
-        print(f"❌ Test failed - system needs debugging")
+        print(f" Test failed - system needs debugging")
         
-    print(f"\n📝 Note: This basic test validates the core functionality")
+    print(f"\n Note: This basic test validates the core functionality")
     print(f"   More sophisticated methods (Hungarian algorithm, warping)")
     print(f"   should achieve higher accuracy than this baseline.")
 

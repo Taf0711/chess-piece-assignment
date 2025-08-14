@@ -11,7 +11,7 @@ import numpy as np
 
 def analyze_accuracy_issues():
     """Analyze what's causing 0% accuracy"""
-    print("🔍 DEBUGGING ACCURACY ISSUES")
+    print(" DEBUGGING ACCURACY ISSUES")
     print("=" * 50)
     
     # Initialize components
@@ -24,18 +24,18 @@ def analyze_accuracy_issues():
     result = data_loader.process_image_optimized(image_id, debug=True)
     
     if not result or not result.get('success'):
-        print("❌ Failed to process image")
+        print(" Failed to process image")
         return
     
     pieces = result['pieces']
     ground_truth = result['ground_truth']
     
-    print(f"\n📊 GROUND TRUTH ANALYSIS:")
+    print(f"\n GROUND TRUTH ANALYSIS:")
     print(f"Ground truth squares: {len(ground_truth)}")
     for square, piece_type in sorted(ground_truth.items())[:10]:
         print(f"  {square}: {piece_type}")
     
-    print(f"\n🎯 DETECTED PIECES ANALYSIS:")
+    print(f"\n DETECTED PIECES ANALYSIS:")
     print(f"Detected pieces: {len(pieces)}")
     for i, piece in enumerate(pieces[:10]):
         print(f"  {i}: {piece.piece_type} at ({piece.center_x:.1f}, {piece.center_y:.1f})")
@@ -55,11 +55,11 @@ def analyze_accuracy_issues():
         print(f"     Expected: {ground_truth_piece}, Match: {match}")
     
     # Analyze coordinate system issues
-    print(f"\n🔍 COORDINATE SYSTEM ANALYSIS:")
+    print(f"\n COORDINATE SYSTEM ANALYSIS:")
     analyze_coordinate_issues(pieces, ground_truth)
     
     # Analyze piece type mismatches
-    print(f"\n🔍 PIECE TYPE ANALYSIS:")
+    print(f"\n PIECE TYPE ANALYSIS:")
     analyze_piece_type_issues(pieces, assignments, ground_truth)
 
 def analyze_coordinate_issues(pieces, ground_truth):
@@ -113,7 +113,7 @@ def analyze_piece_type_issues(pieces, assignments, ground_truth):
 
 def test_board_orientation():
     """Test if board orientation is correct"""
-    print(f"\n🔍 BOARD ORIENTATION TEST:")
+    print(f"\n BOARD ORIENTATION TEST:")
     print("Checking if coordinate system matches chess notation...")
     
     # Test square coordinate conversion
@@ -128,7 +128,7 @@ def test_board_orientation():
 
 def create_fixed_mapper():
     """Create a mapper with better coordinate handling"""
-    print(f"\n🛠️ TESTING COORDINATE FIXES:")
+    print(f"\n🛠 TESTING COORDINATE FIXES:")
     
     class FixedPieceMapper(OptimizedPieceMapper):
         def _square_to_algebraic(self, file: int, rank: int) -> str:
@@ -151,18 +151,18 @@ def create_fixed_mapper():
     for square in test_squares:
         file, rank = fixed_mapper._algebraic_to_square(square)
         back_to_square = fixed_mapper._square_to_algebraic(file, rank)
-        print(f"  {square} -> ({file}, {rank}) -> {back_to_square} ✓" if square == back_to_square else f"  {square} -> ({file}, {rank}) -> {back_to_square} ❌")
+        print(f"  {square} -> ({file}, {rank}) -> {back_to_square} ✓" if square == back_to_square else f"  {square} -> ({file}, {rank}) -> {back_to_square} ")
 
 def main():
     """Run accuracy debugging"""
-    print("🚀 CHESS PIECE MAPPING - ACCURACY DEBUGGING")
+    print(" CHESS PIECE MAPPING - ACCURACY DEBUGGING")
     print("=" * 60)
     
     analyze_accuracy_issues()
     test_board_orientation()
     create_fixed_mapper()
     
-    print(f"\n📋 IDENTIFIED ISSUES:")
+    print(f"\n IDENTIFIED ISSUES:")
     print("1. Coordinate system may be flipped or offset")
     print("2. Piece type naming might not match exactly")
     print("3. Board orientation could be incorrect")

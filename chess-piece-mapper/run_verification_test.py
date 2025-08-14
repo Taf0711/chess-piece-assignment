@@ -118,12 +118,12 @@ def create_detailed_visualization(image, pieces, assignments, ground_truth,
 
 def run_verification_test():
     """Run comprehensive verification test with proper tracking"""
-    print("🔍 VERIFICATION TEST - ACTUAL ACCURACY TRACKING")
+    print(" VERIFICATION TEST - ACTUAL ACCURACY TRACKING")
     print("=" * 70)
     
     # Create dated run folder
     run_folder = create_dated_run_folder()
-    print(f"📁 Results folder: {run_folder}")
+    print(f" Results folder: {run_folder}")
     
     # Initialize components
     data_path = "/home/pre/projects/chess-datagen/gen-data/render_src/coco_data_2025_08_08__21_53_08"
@@ -136,17 +136,17 @@ def run_verification_test():
     total_accuracy = 0.0
     successful_tests = 0
     
-    print(f"\n🧪 Testing {len(test_images)} images...")
+    print(f"\n Testing {len(test_images)} images...")
     
     for image_id in test_images:
-        print(f"\n📸 Processing Image {image_id}:")
+        print(f"\n Processing Image {image_id}:")
         
         try:
             # Load and process
             result = data_loader.process_image_optimized(image_id)
             
             if not result or not result.get('success'):
-                print(f"  ❌ Failed to process image")
+                print(f"   Failed to process image")
                 continue
             
             pieces = result['pieces']
@@ -154,10 +154,10 @@ def run_verification_test():
             image = data_loader.load_image(image_id)
             
             if not pieces or not ground_truth:
-                print(f"  ⚠️ No pieces ({len(pieces)}) or ground truth ({len(ground_truth)})")
+                print(f"  ️ No pieces ({len(pieces)}) or ground truth ({len(ground_truth)})")
                 continue
             
-            print(f"  📊 Found {len(pieces)} pieces, {len(ground_truth)} ground truth")
+            print(f"   Found {len(pieces)} pieces, {len(ground_truth)} ground truth")
             
             # Convert to simple pieces for direct mapping
             simple_pieces = [
@@ -173,8 +173,8 @@ def run_verification_test():
             correct = evaluation['correct']
             total = evaluation['total']
             
-            print(f"  🎯 Direct Mapping: {correct}/{total} = {accuracy:.1%}")
-            print(f"  📋 Assignments made: {len(assignments)}")
+            print(f"   Direct Mapping: {correct}/{total} = {accuracy:.1%}")
+            print(f"   Assignments made: {len(assignments)}")
             
             # Create detailed visualization
             viz_path = f"{run_folder}/images/detailed_result_{image_id:03d}.png"
@@ -182,7 +182,7 @@ def run_verification_test():
                 image, pieces, assignments, ground_truth, 
                 evaluation, image_id, viz_path
             )
-            print(f"  🖼️ Visualization saved: {viz_path}")
+            print(f"  ️ Visualization saved: {viz_path}")
             
             # Track results
             if accuracy > 0:
@@ -222,7 +222,7 @@ def run_verification_test():
             results.append(result_data)
             
         except Exception as e:
-            print(f"  ❌ Error processing image {image_id}: {str(e)}")
+            print(f"   Error processing image {image_id}: {str(e)}")
     
     # Calculate final results
     if successful_tests > 0:
@@ -230,15 +230,15 @@ def run_verification_test():
         best_result = max(results, key=lambda x: x['accuracy'])
         worst_result = min(results, key=lambda x: x['accuracy'])
         
-        print(f"\n📊 VERIFICATION RESULTS:")
+        print(f"\n VERIFICATION RESULTS:")
         print("=" * 70)
-        print(f"🎯 Average Accuracy: {avg_accuracy:.1%}")
-        print(f"📈 Successful Tests: {successful_tests}/{len(test_images)}")
-        print(f"🏆 Best Result: {best_result['accuracy']:.1%} (Image {best_result['image_id']})")
-        print(f"📉 Worst Result: {worst_result['accuracy']:.1%} (Image {worst_result['image_id']})")
+        print(f" Average Accuracy: {avg_accuracy:.1%}")
+        print(f" Successful Tests: {successful_tests}/{len(test_images)}")
+        print(f" Best Result: {best_result['accuracy']:.1%} (Image {best_result['image_id']})")
+        print(f" Worst Result: {worst_result['accuracy']:.1%} (Image {worst_result['image_id']})")
         
         # Show detailed breakdown
-        print(f"\n📋 Detailed Results:")
+        print(f"\n Detailed Results:")
         for result in results:
             print(f"  Image {result['image_id']:2d}: {result['accuracy']:5.1%} "
                   f"({result['correct']:2d}/{result['total']:2d}) - "
@@ -267,41 +267,41 @@ def run_verification_test():
         with open(report_path, 'w') as f:
             json.dump(report, f, indent=2)
         
-        print(f"\n📝 Comprehensive report saved: {report_path}")
-        print(f"📁 All visualizations saved in: {run_folder}/images/")
+        print(f"\n Comprehensive report saved: {report_path}")
+        print(f" All visualizations saved in: {run_folder}/images/")
         
         return avg_accuracy, run_folder
     else:
-        print(f"\n❌ No successful tests completed")
+        print(f"\n No successful tests completed")
         return 0.0, run_folder
 
 def main():
     """Run verification test"""
-    print("🚀 CHESS PIECE MAPPING - VERIFICATION TEST")
+    print(" CHESS PIECE MAPPING - VERIFICATION TEST")
     print("=" * 80)
     
     accuracy, run_folder = run_verification_test()
     
-    print(f"\n🏁 VERIFICATION CONCLUSION:")
+    print(f"\n VERIFICATION CONCLUSION:")
     print("=" * 80)
-    print(f"📊 ACTUAL Measured Accuracy: {accuracy:.1%}")
-    print(f"📁 Results Location: {run_folder}")
-    print(f"🖼️ Detailed visualizations show exactly what was achieved")
+    print(f" ACTUAL Measured Accuracy: {accuracy:.1%}")
+    print(f" Results Location: {run_folder}")
+    print(f"️ Detailed visualizations show exactly what was achieved")
     
     if accuracy >= 0.5:
-        print(f"🎉 TARGET ACHIEVED: ≥50% accuracy!")
+        print(f" TARGET ACHIEVED: ≥50% accuracy!")
     elif accuracy > 0.2:
-        print(f"📈 SIGNIFICANT PROGRESS: {accuracy:.1%} (target: 50%)")
+        print(f" SIGNIFICANT PROGRESS: {accuracy:.1%} (target: 50%)")
     elif accuracy > 0.0:
-        print(f"🔧 SOME PROGRESS: {accuracy:.1%} (target: 50%)")
+        print(f" SOME PROGRESS: {accuracy:.1%} (target: 50%)")
     else:
-        print(f"❌ NO PROGRESS: System needs debugging")
+        print(f" NO PROGRESS: System needs debugging")
     
-    print(f"\n✅ This run provides:")
-    print(f"   📊 Actual measured accuracy with verification")
-    print(f"   🖼️ Detailed visualizations showing real results")
-    print(f"   📝 Comprehensive JSON report with assignment details")
-    print(f"   📁 Organized in dated folder for easy tracking")
+    print(f"\n This run provides:")
+    print(f"    Actual measured accuracy with verification")
+    print(f"   ️ Detailed visualizations showing real results")
+    print(f"    Comprehensive JSON report with assignment details")
+    print(f"    Organized in dated folder for easy tracking")
 
 if __name__ == "__main__":
     main()

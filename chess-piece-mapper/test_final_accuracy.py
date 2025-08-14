@@ -9,7 +9,7 @@ from src.final_accuracy_mapper import FinalAccuracyMapper
 
 def test_final_accuracy():
     """Test the final accuracy-improved mapper"""
-    print("🚀 FINAL ACCURACY IMPROVEMENT TEST")
+    print(" FINAL ACCURACY IMPROVEMENT TEST")
     print("=" * 70)
     
     # Initialize components
@@ -24,24 +24,24 @@ def test_final_accuracy():
     successful_tests = 0
     detailed_results = []
     
-    print(f"🔍 Testing on {len(test_images)} images with comprehensive fixes...")
+    print(f" Testing on {len(test_images)} images with comprehensive fixes...")
     
     for image_id in test_images:
-        print(f"\n📸 Processing Image {image_id}:")
+        print(f"\n Processing Image {image_id}:")
         
         # Load image and data
         image = data_loader.load_image(image_id)
         annotations = data_loader.get_image_annotations(image_id)
         
         if image is None:
-            print(f"  ❌ Failed to load image")
+            print(f"   Failed to load image")
             continue
         
         # Load ground truth
         ground_truth = data_loader._load_ground_truth_optimized(image_id)
         
         if not ground_truth:
-            print(f"  ⚠️  No ground truth available")
+            print(f"  ️  No ground truth available")
             continue
         
         # Enhanced corner detection
@@ -79,7 +79,7 @@ def test_final_accuracy():
                     pieces.append(piece_obj)
         
         if not pieces:
-            print(f"  ❌ No valid pieces after transformation")
+            print(f"   No valid pieces after transformation")
             continue
         
         # Solve assignment
@@ -90,9 +90,9 @@ def test_final_accuracy():
         correct = evaluation['correct']
         total = evaluation['total']
         
-        print(f"  📊 Results: {correct}/{total} = {accuracy:.1%}")
+        print(f"   Results: {correct}/{total} = {accuracy:.1%}")
         print(f"  📍 Corners: {corners[0]} → {corners[2]}")
-        print(f"  🎯 Assignments: {len(assignments)}")
+        print(f"   Assignments: {len(assignments)}")
         
         if accuracy > 0:
             total_accuracy += accuracy
@@ -119,39 +119,39 @@ def test_final_accuracy():
                     sample_correct.append(f"{square}:{predicted}")
             
             if sample_correct:
-                print(f"  ✅ Correct: {', '.join(sample_correct[:3])}")
+                print(f"   Correct: {', '.join(sample_correct[:3])}")
     
     # Calculate final results
     if successful_tests > 0:
         avg_accuracy = total_accuracy / successful_tests
         
-        print(f"\n📊 FINAL RESULTS SUMMARY:")
+        print(f"\n FINAL RESULTS SUMMARY:")
         print("=" * 70)
-        print(f"🎯 Average Accuracy: {avg_accuracy:.1%}")
-        print(f"📈 Successful Tests: {successful_tests}/{len(test_images)}")
-        print(f"🏆 Best Result: {max(detailed_results, key=lambda x: x['accuracy'])['accuracy']:.1%}")
-        print(f"📉 Worst Result: {min(detailed_results, key=lambda x: x['accuracy'])['accuracy']:.1%}")
+        print(f" Average Accuracy: {avg_accuracy:.1%}")
+        print(f" Successful Tests: {successful_tests}/{len(test_images)}")
+        print(f" Best Result: {max(detailed_results, key=lambda x: x['accuracy'])['accuracy']:.1%}")
+        print(f" Worst Result: {min(detailed_results, key=lambda x: x['accuracy'])['accuracy']:.1%}")
         
         # Show detailed breakdown
-        print(f"\n📋 Detailed Results:")
+        print(f"\n Detailed Results:")
         for result in detailed_results:
             print(f"  Image {result['image_id']:2d}: {result['accuracy']:5.1%} "
                   f"({result['correct']:2d}/{result['total']:2d}) "
                   f"- {result['assignments']:2d} assignments from {result['pieces']:2d} pieces")
         
         if avg_accuracy >= 0.5:
-            print(f"\n🎉 SUCCESS! Achieved ≥50% accuracy target: {avg_accuracy:.1%}")
+            print(f"\n SUCCESS! Achieved ≥50% accuracy target: {avg_accuracy:.1%}")
             return True, avg_accuracy
         else:
-            print(f"\n⚠️  Close but not quite 50% yet: {avg_accuracy:.1%}")
+            print(f"\n️  Close but not quite 50% yet: {avg_accuracy:.1%}")
             return False, avg_accuracy
     else:
-        print(f"\n❌ No successful tests completed")
+        print(f"\n No successful tests completed")
         return False, 0.0
 
 def compare_all_versions():
     """Compare all mapper versions"""
-    print(f"\n📈 COMPREHENSIVE MAPPER COMPARISON")
+    print(f"\n COMPREHENSIVE MAPPER COMPARISON")
     print("=" * 70)
     
     from src.optimized_mapper import OptimizedPieceMapper
@@ -230,13 +230,13 @@ def generate_accuracy_report():
     with open('results/final_accuracy_report.json', 'w') as f:
         json.dump(report, f, indent=2, default=str)
     
-    print(f"📝 Accuracy report saved to: results/final_accuracy_report.json")
+    print(f" Accuracy report saved to: results/final_accuracy_report.json")
     
     return success, accuracy
 
 def main():
     """Run comprehensive accuracy testing"""
-    print("🚀 CHESS PIECE MAPPING - COMPREHENSIVE ACCURACY TEST")
+    print(" CHESS PIECE MAPPING - COMPREHENSIVE ACCURACY TEST")
     print("=" * 80)
     
     # Test final accuracy
@@ -245,26 +245,26 @@ def main():
     # Compare all versions
     compare_all_versions()
     
-    print(f"\n🎯 FINAL ACCURACY ACHIEVEMENT SUMMARY:")
+    print(f"\n FINAL ACCURACY ACHIEVEMENT SUMMARY:")
     print("=" * 80)
     
     if success:
-        print(f"🎉 TARGET ACHIEVED!")
+        print(f" TARGET ACHIEVED!")
         print(f"   Final Accuracy: {accuracy:.1%}")
         print(f"   Target: ≥50%")
-        print(f"   Status: SUCCESS ✅")
+        print(f"   Status: SUCCESS ")
     else:
-        print(f"🔧 PROGRESS MADE:")
+        print(f" PROGRESS MADE:")
         print(f"   Final Accuracy: {accuracy:.1%}")
         print(f"   Target: ≥50%")
-        print(f"   Status: NEEDS MORE WORK ⚠️")
+        print(f"   Status: NEEDS MORE WORK ️")
     
-    print(f"\n🛠️ Key Technical Improvements:")
-    print(f"   ✅ Fixed board corner detection")
-    print(f"   ✅ Corrected coordinate system orientation")
-    print(f"   ✅ Improved piece type normalization")
-    print(f"   ✅ Enhanced chess logic cost function")
-    print(f"   ✅ Comprehensive error handling")
+    print(f"\n🛠 Key Technical Improvements:")
+    print(f"    Fixed board corner detection")
+    print(f"    Corrected coordinate system orientation")
+    print(f"    Improved piece type normalization")
+    print(f"    Enhanced chess logic cost function")
+    print(f"    Comprehensive error handling")
 
 if __name__ == "__main__":
     main()

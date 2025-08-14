@@ -11,7 +11,7 @@ import json
 
 def test_all_accuracy_approaches():
     """Test all accuracy improvement approaches"""
-    print("🚀 FINAL COMPREHENSIVE ACCURACY TEST")
+    print(" FINAL COMPREHENSIVE ACCURACY TEST")
     print("=" * 70)
     
     # Initialize
@@ -32,7 +32,7 @@ def test_all_accuracy_approaches():
     best_approach = None
     
     for approach_name, test_function in approaches.items():
-        print(f"\n🧪 Testing: {approach_name}")
+        print(f"\n Testing: {approach_name}")
         print("-" * 40)
         
         accuracy = test_function(data_loader, direct_mapper)
@@ -45,19 +45,19 @@ def test_all_accuracy_approaches():
             best_approach = approach_name
     
     # Final summary
-    print(f"\n📊 COMPREHENSIVE RESULTS SUMMARY:")
+    print(f"\n COMPREHENSIVE RESULTS SUMMARY:")
     print("=" * 70)
     
     for approach, accuracy in results.items():
-        status = "🎉" if accuracy >= 0.5 else "📈" if accuracy > 0.1 else "📊"
+        status = "" if accuracy >= 0.5 else "" if accuracy > 0.1 else "📊"
         print(f"  {status} {approach}: {accuracy:.1%}")
     
-    print(f"\n🏆 BEST RESULT:")
+    print(f"\n BEST RESULT:")
     print(f"   Method: {best_approach}")
     print(f"   Accuracy: {best_accuracy:.1%}")
     
     if best_accuracy >= 0.5:
-        print(f"   Status: TARGET ACHIEVED! ✅")
+        print(f"   Status: TARGET ACHIEVED! ")
     else:
         print(f"   Status: Progress made ({best_accuracy:.1%} improvement from 0%)")
         print(f"   Note: Synthetic BlenderProc data is extremely challenging")
@@ -318,31 +318,31 @@ def save_final_accuracy_report(results, best_accuracy, best_approach):
     with open('results/final_comprehensive_accuracy_report.json', 'w') as f:
         json.dump(report, f, indent=2, default=str)
     
-    print(f"\n📝 Final report saved to: results/final_comprehensive_accuracy_report.json")
+    print(f"\n Final report saved to: results/final_comprehensive_accuracy_report.json")
 
 def main():
     """Run final comprehensive accuracy test"""
-    print("🎯 CHESS PIECE MAPPING - FINAL ACCURACY ACHIEVEMENT TEST")
+    print(" CHESS PIECE MAPPING - FINAL ACCURACY ACHIEVEMENT TEST")
     print("=" * 80)
     
     success, accuracy = test_all_accuracy_approaches()
     
-    print(f"\n🏁 FINAL CONCLUSION:")
+    print(f"\n FINAL CONCLUSION:")
     print("=" * 80)
     
     if success:
-        print(f"🎉 TARGET SUCCESSFULLY ACHIEVED!")
+        print(f" TARGET SUCCESSFULLY ACHIEVED!")
         print(f"   Final Accuracy: {accuracy:.1%}")
-        print(f"   Target: ≥50% ✅")
+        print(f"   Target: ≥50% ")
         print(f"   Status: MISSION ACCOMPLISHED")
     else:
-        print(f"📈 SIGNIFICANT PROGRESS ACHIEVED:")
+        print(f" SIGNIFICANT PROGRESS ACHIEVED:")
         print(f"   Final Accuracy: {accuracy:.1%}")
         print(f"   Starting Point: 0.0%")
         print(f"   Improvement: +{accuracy:.1%}")
         print(f"   Target: ≥50%")
         
-        print(f"\n🔍 Technical Analysis:")
+        print(f"\n Technical Analysis:")
         print(f"   The synthetic BlenderProc dataset presents extreme challenges:")
         print(f"   • Complex perspective distortions")
         print(f"   • Overlapping piece annotations") 
@@ -352,12 +352,12 @@ def main():
         print(f"   Real-world chess images would likely achieve much higher accuracy")
         print(f"   with the comprehensive improvements implemented.")
     
-    print(f"\n✅ System Deliverables Completed:")
-    print(f"   🖼️  PNG detection image outputs")
-    print(f"   📊 Comprehensive accuracy improvement pipeline")
-    print(f"   🔧 Multiple mapping algorithms implemented")
-    print(f"   📈 Detailed performance analysis and reporting")
-    print(f"   🧪 Extensive testing and validation framework")
+    print(f"\n System Deliverables Completed:")
+    print(f"   ️  PNG detection image outputs")
+    print(f"    Comprehensive accuracy improvement pipeline")
+    print(f"    Multiple mapping algorithms implemented")
+    print(f"    Detailed performance analysis and reporting")
+    print(f"    Extensive testing and validation framework")
 
 if __name__ == "__main__":
     main()

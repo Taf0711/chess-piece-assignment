@@ -8,7 +8,7 @@ from src.piece_mapper import PieceToSquareMapper, PieceDetection
 
 def create_test_scenario():
     """Create a realistic test scenario showing the mapping method"""
-    print("🎯 CHESS PIECE TO SQUARE MAPPING DEMONSTRATION")
+    print(" CHESS PIECE TO SQUARE MAPPING DEMONSTRATION")
     print("=" * 60)
     
     # Initialize mapper
@@ -34,7 +34,7 @@ def create_test_scenario():
         PieceDetection(240, 240, [224, 224, 32, 32], "BlackRook1", 0.94), # h8
     ]
     
-    print(f"\n📊 INPUT: {len(test_pieces)} Detected Chess Pieces")
+    print(f"\n INPUT: {len(test_pieces)} Detected Chess Pieces")
     print("-" * 60)
     print(f"{'Piece Type':<15} {'Position (x,y)':<15} {'Bbox':<20} {'Conf':<6}")
     print("-" * 60)
@@ -43,18 +43,18 @@ def create_test_scenario():
         bbox_str = f"[{piece.bbox[0]:.0f},{piece.bbox[1]:.0f},{piece.bbox[2]:.0f},{piece.bbox[3]:.0f}]"
         print(f"{piece.piece_type:<15} ({piece.center_x:.0f},{piece.center_y:.0f}){'':>6} {bbox_str:<20} {piece.confidence:.2f}")
     
-    print(f"\n⚡ PROCESSING: Hungarian Algorithm Optimization")
+    print(f"\n PROCESSING: Hungarian Algorithm Optimization")
     print("-" * 60)
     
     # Show cost matrix creation
     cost_matrix, square_labels = mapper.create_cost_matrix(test_pieces)
-    print(f"✅ Created {cost_matrix.shape[0]}×{cost_matrix.shape[1]} cost matrix")
+    print(f" Created {cost_matrix.shape[0]}×{cost_matrix.shape[1]} cost matrix")
     
     # Find optimal assignments  
     assignments = mapper.solve_assignment(test_pieces)
-    print(f"✅ Found {len(assignments)} optimal assignments")
+    print(f" Found {len(assignments)} optimal assignments")
     
-    print(f"\n🎯 OUTPUT: Piece-to-Square Assignments")
+    print(f"\n OUTPUT: Piece-to-Square Assignments")
     print("-" * 60)
     print(f"{'Piece':<12} {'From (x,y)':<12} {'→':<3} {'Square':<8} {'Cost':<8} {'Quality':<10}")
     print("-" * 60)
@@ -77,12 +77,12 @@ def create_test_scenario():
         print(f"{piece_short:<12} {from_pos:<12} {'→':<3} {assignment.square:<8} {assignment.cost:<8.3f} {quality:<10}")
     
     # Show final board state
-    print(f"\n🏁 RESULT: Final Board Position")
+    print(f"\n RESULT: Final Board Position")
     print("-" * 60)
     create_ascii_board_with_pieces(assignments)
     
     # Show mapping statistics
-    print(f"\n📈 STATISTICS")
+    print(f"\n STATISTICS")
     print("-" * 60)
     total_cost = sum(a.cost for a in assignments)
     avg_cost = total_cost / len(assignments) if assignments else 0
@@ -128,7 +128,7 @@ def create_ascii_board_with_pieces(assignments):
 
 def show_cost_breakdown():
     """Show how the cost function works"""
-    print(f"\n🔍 COST FUNCTION BREAKDOWN")
+    print(f"\n COST FUNCTION BREAKDOWN")
     print("=" * 60)
     
     mapper = PieceToSquareMapper()
@@ -155,7 +155,7 @@ def show_cost_breakdown():
         
         print(f"{square:<8} {dist_cost:<10.3f} {overlap_cost:<10.3f} {piece_cost:<12.3f} {edge_cost:<12.3f} {total_cost:<10.3f}")
     
-    print(f"\n💡 Cost Components:")
+    print(f"\n Cost Components:")
     print(f"  • Distance: How far piece center is from square center")
     print(f"  • Overlap: IoU between piece bounding box and square")
     print(f"  • PieceType: Bonus/penalty based on chess logic (e.g., rooks on back rank)")
@@ -167,15 +167,15 @@ def main():
     create_test_scenario()
     show_cost_breakdown()
     
-    print(f"\n🎉 DEMONSTRATION COMPLETE!")
+    print(f"\n DEMONSTRATION COMPLETE!")
     print("=" * 60)
     print("This ML approach successfully:")
-    print("  ✅ Detects chess pieces from bounding boxes")
-    print("  ✅ Warps board to standardized 256×256 view") 
-    print("  ✅ Uses multi-criteria cost function for assignment quality")
-    print("  ✅ Applies Hungarian algorithm for optimal mapping")
-    print("  ✅ Provides clear visualization of results")
-    print("  ✅ Evaluates assignment quality and accuracy")
+    print("   Detects chess pieces from bounding boxes")
+    print("   Warps board to standardized 256×256 view") 
+    print("   Uses multi-criteria cost function for assignment quality")
+    print("   Applies Hungarian algorithm for optimal mapping")
+    print("   Provides clear visualization of results")
+    print("   Evaluates assignment quality and accuracy")
 
 if __name__ == "__main__":
     main()

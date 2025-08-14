@@ -334,7 +334,7 @@ class OptimizedTrainingPipeline:
 
 def main():
     """Run the optimized training pipeline"""
-    print("🚀 OPTIMIZED CHESS PIECE MAPPING TRAINING PIPELINE")
+    print(" OPTIMIZED CHESS PIECE MAPPING TRAINING PIPELINE")
     print("=" * 70)
     
     # Initialize pipeline
@@ -344,7 +344,7 @@ def main():
     # Run comprehensive test
     results = pipeline.run_comprehensive_test()
     
-    print("\n🎉 OPTIMIZED TRAINING COMPLETE!")
+    print("\n OPTIMIZED TRAINING COMPLETE!")
     print("=" * 70)
     print("Key Results:")
     print(f"  • Training success rate: {results['training_performance']['assignment_success_rate']:.1%}")

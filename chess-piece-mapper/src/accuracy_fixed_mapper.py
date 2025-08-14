@@ -274,7 +274,7 @@ class AccuracyFixedMapper:
 
 def test_fixed_mapper():
     """Test the fixed mapper on sample data"""
-    print("🧪 TESTING FIXED MAPPER")
+    print(" TESTING FIXED MAPPER")
     print("=" * 50)
     
     from src.optimized_data_loader import OptimizedChessDataLoader
@@ -318,7 +318,7 @@ def test_fixed_mapper():
             predicted = assignment.piece.piece_type
             actual = ground_truth.get(square, 'NOT_FOUND')
             correct = fixed_mapper.normalize_piece_type(predicted) == fixed_mapper.normalize_piece_type(actual)
-            status = "✓" if correct else "❌"
+            status = "✓" if correct else ""
             print(f"  {square}: {predicted} vs {actual} {status}")
         
         return evaluation['accuracy']

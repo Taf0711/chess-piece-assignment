@@ -203,7 +203,7 @@ class DirectCoordinateMapper:
 
 def test_direct_mapping_approach():
     """Test the direct coordinate mapping approach"""
-    print("🎯 TESTING DIRECT COORDINATE MAPPING APPROACH")
+    print(" TESTING DIRECT COORDINATE MAPPING APPROACH")
     print("=" * 60)
     
     from src.optimized_data_loader import OptimizedChessDataLoader
@@ -221,19 +221,19 @@ def test_direct_mapping_approach():
     print(f"Testing on {len(test_images)} images...")
     
     for image_id in test_images:
-        print(f"\n📸 Image {image_id}:")
+        print(f"\n Image {image_id}:")
         
         result = data_loader.process_image_optimized(image_id)
         
         if not result or not result.get('success'):
-            print(f"  ❌ Failed to process")
+            print(f"   Failed to process")
             continue
         
         pieces = result['pieces']
         ground_truth = result['ground_truth']
         
         if not pieces or not ground_truth:
-            print(f"  ⚠️  No pieces or ground truth")
+            print(f"  ️  No pieces or ground truth")
             continue
         
         # Convert to simple pieces
@@ -255,8 +255,8 @@ def test_direct_mapping_approach():
         correct = evaluation['correct']
         total = evaluation['total']
         
-        print(f"  📊 Result: {correct}/{total} = {accuracy:.1%}")
-        print(f"  🎯 Assignments: {len(assignments)}")
+        print(f"   Result: {correct}/{total} = {accuracy:.1%}")
+        print(f"   Assignments: {len(assignments)}")
         
         if accuracy > 0:
             total_accuracy += accuracy
@@ -274,27 +274,27 @@ def test_direct_mapping_approach():
                     correct_samples.append(f"{square}:{predicted[:6]}")
             
             if correct_samples:
-                print(f"  ✅ Correct: {', '.join(correct_samples)}")
+                print(f"   Correct: {', '.join(correct_samples)}")
     
     if successful_tests > 0:
         avg_accuracy = total_accuracy / successful_tests
-        print(f"\n📊 DIRECT MAPPING RESULTS:")
+        print(f"\n DIRECT MAPPING RESULTS:")
         print(f"  Average Accuracy: {avg_accuracy:.1%}")
         print(f"  Successful Tests: {successful_tests}/{len(test_images)}")
         
         if avg_accuracy >= 0.5:
-            print(f"  🎉 SUCCESS: Achieved ≥50% target!")
+            print(f"   SUCCESS: Achieved ≥50% target!")
         else:
-            print(f"  📈 Progress: {avg_accuracy:.1%} (target: 50%)")
+            print(f"   Progress: {avg_accuracy:.1%} (target: 50%)")
         
         return avg_accuracy
     else:
-        print(f"  ❌ No successful tests")
+        print(f"   No successful tests")
         return 0.0
 
 def create_hybrid_approach():
     """Create hybrid approach combining all improvements"""
-    print(f"\n🔧 CREATING HYBRID APPROACH")
+    print(f"\n CREATING HYBRID APPROACH")
     print("=" * 60)
     
     class HybridMapper:
@@ -381,21 +381,21 @@ def create_hybrid_approach():
     
     if successful_tests > 0:
         avg_accuracy = total_accuracy / successful_tests
-        print(f"\n🎯 HYBRID APPROACH RESULTS:")
+        print(f"\n HYBRID APPROACH RESULTS:")
         print(f"  Average Accuracy: {avg_accuracy:.1%}")
         
         if avg_accuracy >= 0.5:
-            print(f"  🎉 HYBRID SUCCESS: Achieved ≥50% target!")
+            print(f"   HYBRID SUCCESS: Achieved ≥50% target!")
             return True, avg_accuracy
         else:
-            print(f"  📈 Hybrid Progress: {avg_accuracy:.1%}")
+            print(f"   Hybrid Progress: {avg_accuracy:.1%}")
             return False, avg_accuracy
     
     return False, 0.0
 
 def main():
     """Test all approaches to achieve 50% accuracy"""
-    print("🚀 COMPREHENSIVE ACCURACY IMPROVEMENT - FINAL ATTEMPT")
+    print(" COMPREHENSIVE ACCURACY IMPROVEMENT - FINAL ATTEMPT")
     print("=" * 80)
     
     # Test direct mapping
@@ -404,25 +404,25 @@ def main():
     # Test hybrid approach
     hybrid_success, hybrid_accuracy = create_hybrid_approach()
     
-    print(f"\n🏁 FINAL ACCURACY SUMMARY:")
+    print(f"\n FINAL ACCURACY SUMMARY:")
     print("=" * 80)
-    print(f"📊 Results:")
+    print(f" Results:")
     print(f"  Direct Mapping: {direct_accuracy:.1%}")
     print(f"  Hybrid Approach: {hybrid_accuracy:.1%}")
     
     best_accuracy = max(direct_accuracy, hybrid_accuracy)
     
     if best_accuracy >= 0.5:
-        print(f"\n🎉 TARGET ACHIEVED!")
+        print(f"\n TARGET ACHIEVED!")
         print(f"   Best Accuracy: {best_accuracy:.1%}")
-        print(f"   Target: ≥50% ✅")
+        print(f"   Target: ≥50% ")
     else:
-        print(f"\n📈 SIGNIFICANT PROGRESS MADE:")
+        print(f"\n SIGNIFICANT PROGRESS MADE:")
         print(f"   Best Accuracy: {best_accuracy:.1%}")
         print(f"   Target: ≥50%")
         print(f"   Improvement from 0% → {best_accuracy:.1%}")
         
-        print(f"\n🔍 Analysis:")
+        print(f"\n Analysis:")
         print(f"   The synthetic BlenderProc data creates very challenging")
         print(f"   scenarios with perspective distortion and piece overlap.")
         print(f"   Real-world chess images would likely achieve higher accuracy.")

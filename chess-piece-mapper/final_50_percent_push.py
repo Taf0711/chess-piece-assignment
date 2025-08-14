@@ -261,8 +261,8 @@ def create_advanced_visualization(image_id, pieces, assignments, ground_truth, e
     viz_lines = []
     viz_lines.append(f"ADVANCED CHESS PIECE MAPPING - IMAGE {image_id}")
     viz_lines.append("=" * 70)
-    viz_lines.append(f"🎯 Accuracy: {evaluation['correct']}/{evaluation['total']} = {evaluation['accuracy']:.1%}")
-    viz_lines.append(f"📊 Assignments: {len(assignments)} | Pieces: {len(pieces)}")
+    viz_lines.append(f" Accuracy: {evaluation['correct']}/{evaluation['total']} = {evaluation['accuracy']:.1%}")
+    viz_lines.append(f" Assignments: {len(assignments)} | Pieces: {len(pieces)}")
     viz_lines.append("")
     
     # Pass breakdown
@@ -335,11 +335,11 @@ def create_advanced_visualization(image_id, pieces, assignments, ground_truth, e
 
 def test_final_50_percent_push(test_name: str = "final_50_percent_push"):
     """Final push to achieve 50% accuracy"""
-    print(f"🚀 {test_name.upper().replace('_', ' ')} - TARGETING 50% ACCURACY")
+    print(f" {test_name.upper().replace('_', ' ')} - TARGETING 50% ACCURACY")
     print("=" * 80)
     
     run_folder = create_test_run_folder(test_name)
-    print(f"📁 Results folder: {run_folder}")
+    print(f" Results folder: {run_folder}")
     
     # Load data
     train_path = "/home/pre/projects/chess-datagen/gen-data/render_src/coco_data_2025_08_08__21_53_08/train"
@@ -350,10 +350,10 @@ def test_final_50_percent_push(test_name: str = "final_50_percent_push"):
         with open(os.path.join(train_path, 'board_placements.json'), 'r') as f:
             board_placements = json.load(f)
             
-        print(f"✅ Loaded data successfully")
+        print(f" Loaded data successfully")
         
     except Exception as e:
-        print(f"❌ Error loading data: {e}")
+        print(f" Error loading data: {e}")
         return False, 0.0, run_folder
     
     categories = {cat['id']: cat['name'] for cat in coco_data['categories']}
@@ -365,14 +365,14 @@ def test_final_50_percent_push(test_name: str = "final_50_percent_push"):
     total_accuracy = 0.0
     successful_tests = 0
     
-    print(f"\n🧪 Testing {len(test_images)} images with ADVANCED algorithms...")
-    print("🎯 Using multi-pass assignment with advanced cost function")
+    print(f"\n Testing {len(test_images)} images with ADVANCED algorithms...")
+    print(" Using multi-pass assignment with advanced cost function")
     
     for img_data in test_images:
         image_id = img_data['id']
         image_filename = img_data['file_name']
         
-        print(f"\n📸 Image {image_id}:")
+        print(f"\n Image {image_id}:")
         
         try:
             # Get annotations
@@ -435,13 +435,13 @@ def test_final_50_percent_push(test_name: str = "final_50_percent_push"):
                         correct += 1
             
             accuracy = correct / max(1, total)
-            print(f"  📊 Result: {correct}/{total} = {accuracy:.1%} | Assignments: {len(assignments)}")
+            print(f"   Result: {correct}/{total} = {accuracy:.1%} | Assignments: {len(assignments)}")
             
             evaluation = {'accuracy': accuracy, 'correct': correct, 'total': total}
             
             # Create visualization
             viz_path = create_advanced_visualization(image_id, pieces, assignments, ground_truth, evaluation, run_folder)
-            print(f"  🖼️  Visualization: {os.path.basename(viz_path)}")
+            print(f"  ️  Visualization: {os.path.basename(viz_path)}")
             
             if accuracy > 0:
                 total_accuracy += accuracy
@@ -467,7 +467,7 @@ def test_final_50_percent_push(test_name: str = "final_50_percent_push"):
                     correct_count = correct_by_pass.get(pass_num, 0)
                     total_count = pass_counts[pass_num]
                     pass_info.append(f"P{pass_num}:{correct_count}/{total_count}")
-                print(f"  🔍 Passes: {' '.join(pass_info)}")
+                print(f"   Passes: {' '.join(pass_info)}")
             
             # Store result
             results.append({
@@ -482,39 +482,39 @@ def test_final_50_percent_push(test_name: str = "final_50_percent_push"):
             })
             
         except Exception as e:
-            print(f"  ❌ Error: {str(e)}")
+            print(f"   Error: {str(e)}")
     
     # Final results
     if successful_tests > 0:
         avg_accuracy = total_accuracy / successful_tests
         best_result = max(results, key=lambda x: x['accuracy'])
         
-        print(f"\n📊 FINAL 50% PUSH RESULTS:")
+        print(f"\n FINAL 50% PUSH RESULTS:")
         print("=" * 80)
-        print(f"🎯 Average Accuracy: {avg_accuracy:.1%}")
-        print(f"🏆 Best Result: {best_result['accuracy']:.1%} (Image {best_result['image_id']})")
-        print(f"📈 Successful Tests: {successful_tests}/{len(test_images)}")
+        print(f" Average Accuracy: {avg_accuracy:.1%}")
+        print(f" Best Result: {best_result['accuracy']:.1%} (Image {best_result['image_id']})")
+        print(f" Successful Tests: {successful_tests}/{len(test_images)}")
         
         # Progress assessment
         progress = (avg_accuracy / 0.5) * 100
-        print(f"📈 Progress towards 50% target: {progress:.1f}%")
+        print(f" Progress towards 50% target: {progress:.1f}%")
         
         if avg_accuracy >= 0.5:
-            print(f"🎉 TARGET ACHIEVED! 50% ACCURACY REACHED!")
-            status = "🎉 SUCCESS"
+            print(f" TARGET ACHIEVED! 50% ACCURACY REACHED!")
+            status = " SUCCESS"
         elif avg_accuracy >= 0.4:
-            print(f"🔥 VERY CLOSE! Almost at 50% target")
-            status = "🔥 NEAR SUCCESS"
+            print(f" VERY CLOSE! Almost at 50% target")
+            status = " NEAR SUCCESS"
         elif avg_accuracy >= 0.3:
-            print(f"📈 EXCELLENT PROGRESS towards target")
-            status = "📈 STRONG PROGRESS"
+            print(f" EXCELLENT PROGRESS towards target")
+            status = " STRONG PROGRESS"
         else:
-            print(f"📊 Good improvement, continued optimization needed")
-            status = "📊 PROGRESS MADE"
+            print(f" Good improvement, continued optimization needed")
+            status = " PROGRESS MADE"
         
         # Show top performers
         top_results = sorted(results, key=lambda x: x['accuracy'], reverse=True)[:10]
-        print(f"\n🏆 TOP PERFORMING IMAGES:")
+        print(f"\n TOP PERFORMING IMAGES:")
         for i, result in enumerate(top_results):
             print(f"  {i+1:2d}. Image {result['image_id']:3d}: {result['accuracy']:5.1%} "
                   f"({result['correct']:2d}/{result['total']:2d})")
@@ -547,8 +547,8 @@ def test_final_50_percent_push(test_name: str = "final_50_percent_push"):
         with open(report_path, 'w') as f:
             json.dump(report, f, indent=2)
         
-        print(f"\n📝 Report: {report_path}")
-        print(f"🖼️  Visualizations: {run_folder}/visualizations/")
+        print(f"\n Report: {report_path}")
+        print(f"️  Visualizations: {run_folder}/visualizations/")
         
         return True, avg_accuracy, run_folder
     else:
@@ -556,39 +556,39 @@ def test_final_50_percent_push(test_name: str = "final_50_percent_push"):
 
 def main():
     """Run final 50% accuracy push"""
-    print("🚀 CHESS PIECE MAPPING - FINAL 50% ACCURACY PUSH")
+    print(" CHESS PIECE MAPPING - FINAL 50% ACCURACY PUSH")
     print("=" * 90)
     
     success, accuracy, folder = test_final_50_percent_push()
     
-    print(f"\n🏁 FINAL ACCURACY ACHIEVEMENT SUMMARY:")
+    print(f"\n FINAL ACCURACY ACHIEVEMENT SUMMARY:")
     print("=" * 90)
-    print(f"📊 Journey:")
+    print(f" Journey:")
     print(f"   Initial baseline: 9.4%")
     print(f"   Phase 1 improved: 21.1%") 
     print(f"   Final push: {accuracy:.1%}")
-    print(f"🎯 Target: 50.0%")
+    print(f" Target: 50.0%")
     
     if accuracy >= 0.5:
-        print(f"🎉 SUCCESS! TARGET ACHIEVED! 🎉")
+        print(f" SUCCESS! TARGET ACHIEVED! ")
         print(f"   Final accuracy {accuracy:.1%} ≥ 50%")
         print(f"   Mission accomplished!")
     elif accuracy >= 0.4:
-        print(f"🔥 VERY CLOSE TO TARGET!")
+        print(f" VERY CLOSE TO TARGET!")
         print(f"   Achieved {accuracy:.1%} vs 50% target")
         print(f"   Just a few percentage points away!")
     elif accuracy >= 0.3:
-        print(f"📈 EXCELLENT PROGRESS!")
+        print(f" EXCELLENT PROGRESS!")
         print(f"   More than tripled from baseline: 9.4% → {accuracy:.1%}")
         print(f"   Significant advancement towards 50%")
     else:
-        print(f"📊 GOOD IMPROVEMENT!")
+        print(f" GOOD IMPROVEMENT!")
         print(f"   Still doubled baseline accuracy")
     
-    print(f"\n✅ Comprehensive test run complete:")
-    print(f"   📁 Results: {folder}")
-    print(f"   📊 Advanced visualizations with pass breakdowns")
-    print(f"   📝 Detailed JSON report with algorithm analysis")
+    print(f"\n Comprehensive test run complete:")
+    print(f"    Results: {folder}")
+    print(f"    Advanced visualizations with pass breakdowns")
+    print(f"    Detailed JSON report with algorithm analysis")
 
 if __name__ == "__main__":
     main()

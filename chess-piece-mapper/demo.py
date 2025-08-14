@@ -18,41 +18,41 @@ def demo_single_image():
     
     # Process a sample image
     image_id = 0
-    print(f"\n🔍 Processing Image {image_id}...")
+    print(f"\nProcessing Image {image_id}...")
     
     result = trainer.process_single_image(image_id, visualize=False)
     
     if result['success']:
-        print(f"✅ Successfully processed image {image_id}")
-        print(f"📊 Detected pieces: {len(result['pieces'])}")
-        print(f"🎯 Generated assignments: {len(result['assignments'])}")
+        print(f"Successfully processed image {image_id}")
+        print(f"Detected pieces: {len(result['pieces'])}")
+        print(f"Generated assignments: {len(result['assignments'])}")
         
         if result['ground_truth']:
-            print(f"📋 Ground truth positions: {len(result['ground_truth'])}")
+            print(f" Ground truth positions: {len(result['ground_truth'])}")
             
         if result['evaluation']:
             eval_data = result['evaluation']
-            print(f"📈 Accuracy: {eval_data['accuracy']:.3f} ({eval_data['correct']}/{eval_data['total']})")
+            print(f" Accuracy: {eval_data['accuracy']:.3f} ({eval_data['correct']}/{eval_data['total']})")
         
-        print(f"\n🏁 Final Assignments:")
+        print(f"\n Final Assignments:")
         for assignment in result['assignments']:
             piece_name = assignment.piece.piece_type.replace('1', '').replace('2', '').replace('3', '')
             print(f"  {piece_name} -> {assignment.square} (cost: {assignment.cost:.3f})")
             
         if result['ground_truth']:
-            print(f"\n📋 Ground Truth (from FEN):")
+            print(f"\n Ground Truth (from FEN):")
             for square, piece in sorted(result['ground_truth'].items()):
                 piece_clean = piece.replace('1', '').replace('2', '').replace('3', '')
                 print(f"  {piece_clean} -> {square}")
         
         # Show visual mapping output
         if result['assignments']:
-            print(f"\n🎨 Visualizing piece-to-square mappings...")
+            print(f"\n Visualizing piece-to-square mappings...")
             trainer.mapper.visualize_assignments(result['assignments'], result['board_image'])
                 
         return result
     else:
-        print(f"❌ Failed to process image {image_id}: {result.get('error', 'Unknown error')}")
+        print(f"Failed to process image {image_id}: {result.get('error', 'Unknown error')}")
         return None
 
 def demo_cost_function():
@@ -71,7 +71,7 @@ def demo_cost_function():
     print(f"Testing cost function with {len(test_pieces)} pieces:")
     
     for i, piece in enumerate(test_pieces):
-        print(f"\n🔍 Piece {i+1}: {piece.piece_type} at ({piece.center_x}, {piece.center_y})")
+        print(f"\nPiece {i+1}: {piece.piece_type} at ({piece.center_x}, {piece.center_y})")
         
         # Test costs to nearby squares
         test_squares = ['a1', 'b1', 'c1', 'a2', 'b2']
@@ -116,7 +116,7 @@ def demo_assignment_optimization():
         print(f"  {piece_name} -> {assignment.square} (cost: {assignment.cost:.3f})")
     
     # Show detailed mapping visualization
-    print(f"\n🎯 DETAILED ASSIGNMENT VISUALIZATION:")
+    print(f"\nDETAILED ASSIGNMENT VISUALIZATION:")
     print("=" * 50)
     print(f"{'Piece':<12} {'From Position':<15} {'→':<3} {'To Square':<10} {'Cost':<8}")
     print("-" * 50)
@@ -129,7 +129,7 @@ def demo_assignment_optimization():
         print(f"{piece_short:<12} {from_pos:<15} {'→':<3} {to_square:<10} {cost:<8.3f}")
     
     # Create and show ASCII board representation
-    print(f"\n🏁 FINAL BOARD STATE:")
+    print(f"\n FINAL BOARD STATE:")
     create_ascii_board_visualization(assignments)
 
 def create_mapping_visualization():
@@ -146,14 +146,14 @@ def create_mapping_visualization():
     print(f"Processing {len(sample_images)} sample images for visualization...\n")
     
     for image_id in sample_images:
-        print(f"📸 IMAGE {image_id} MAPPING RESULTS:")
+        print(f" IMAGE {image_id} MAPPING RESULTS:")
         print("=" * 50)
         
         result = trainer.process_single_image(image_id, visualize=False)
         
         if result['success'] and result['assignments']:
             # Show detailed mapping table
-            print(f"🔍 DETECTED PIECES → BOARD SQUARES")
+            print(f"DETECTED PIECES → BOARD SQUARES")
             print("-" * 50)
             print(f"{'Piece Type':<15} {'Position':<12} {'→':<3} {'Square':<8} {'Cost':<8}")
             print("-" * 50)
@@ -166,7 +166,7 @@ def create_mapping_visualization():
             # Show evaluation if available
             if result['evaluation']:
                 eval_data = result['evaluation']
-                print(f"\n📊 ACCURACY METRICS:")
+                print(f"\nACCURACY METRICS:")
                 print(f"  Overall Accuracy: {eval_data['accuracy']:.1%}")
                 print(f"  Correct Assignments: {eval_data['correct']}/{eval_data['total']}")
                 
@@ -176,11 +176,11 @@ def create_mapping_visualization():
                     print(f"  False Positives: {', '.join(eval_data['false_positives'])}")
             
             # Create visual board representation
-            print(f"\n🏁 FINAL BOARD MAPPING:")
+            print(f"\n FINAL BOARD MAPPING:")
             create_ascii_board_visualization(result['assignments'])
             
         else:
-            print(f"❌ Failed to process or no assignments found")
+            print(f"Failed to process or no assignments found")
         
         print("\n" + "="*60 + "\n")
 
@@ -237,14 +237,14 @@ def main():
     # Demo 4: Create detailed mapping visualization
     create_mapping_visualization()
     
-    print(f"\n🎉 Demo complete! Key achievements:")
-    print(f"  ✅ Data loading from COCO format")
-    print(f"  ✅ Board warping to 256×256 standard view")
-    print(f"  ✅ Piece detection to square mapping")
-    print(f"  ✅ Hungarian algorithm assignment optimization")
-    print(f"  ✅ FEN ground truth loading and evaluation")
-    print(f"  ✅ Cost function with multiple criteria")
-    print(f"  ✅ Visual output showing final piece mappings")
+    print(f"\n Demo complete! Key achievements:")
+    print(f"  Data loading from COCO format")
+    print(f"  Board warping to 256×256 standard view")
+    print(f"  Piece detection to square mapping")
+    print(f"  Hungarian algorithm assignment optimization")
+    print(f"  FEN ground truth loading and evaluation")
+    print(f"  Cost function with multiple criteria")
+    print(f"  Visual output showing final piece mappings")
 
 if __name__ == "__main__":
     main()

@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 def analyze_original_vs_warped():
     """Analyze the board warping transformation"""
-    print("🔍 ANALYZING BOARD WARPING TRANSFORMATION")
+    print(" ANALYZING BOARD WARPING TRANSFORMATION")
     print("=" * 60)
     
     data_path = "/home/pre/projects/chess-datagen/gen-data/render_src/coco_data_2025_08_08__21_53_08"
@@ -22,7 +22,7 @@ def analyze_original_vs_warped():
     result = data_loader.process_image_optimized(image_id, debug=True)
     
     if not result or not result.get('success'):
-        print("❌ Failed to process image")
+        print(" Failed to process image")
         return
     
     original_image = result['original_image']
@@ -68,7 +68,7 @@ def analyze_original_vs_warped():
                 print(f"    Expected position: {expected_pos}")
     
     # Test the transformation matrix manually
-    print(f"\n🔧 TESTING TRANSFORMATION MATRIX:")
+    print(f"\n TESTING TRANSFORMATION MATRIX:")
     test_points_original = [
         corners[0], corners[1], corners[2], corners[3],  # Board corners
         [original_image.shape[1]/2, original_image.shape[0]/2]  # Center
@@ -99,7 +99,7 @@ def get_expected_starting_position(piece_name):
 
 def create_improved_board_detector():
     """Create an improved board corner detector"""
-    print(f"\n🛠️ CREATING IMPROVED BOARD DETECTOR")
+    print(f"\n🛠 CREATING IMPROVED BOARD DETECTOR")
     print("=" * 60)
     
     data_path = "/home/pre/projects/chess-datagen/gen-data/render_src/coco_data_2025_08_08__21_53_08"
@@ -110,7 +110,7 @@ def create_improved_board_detector():
     image = data_loader.load_image(image_id)
     
     if image is None:
-        print("❌ Failed to load image")
+        print(" Failed to load image")
         return
     
     print(f"Analyzing image shape: {image.shape}")
@@ -127,7 +127,7 @@ def create_improved_board_detector():
     best_score = -1
     
     for method in methods:
-        print(f"\n🔍 Testing method: {method}")
+        print(f"\n Testing method: {method}")
         
         try:
             if method == "chessboard_pattern":
@@ -151,11 +151,11 @@ def create_improved_board_detector():
             print(f"  Failed: {e}")
     
     if best_corners is not None:
-        print(f"\n✅ Best corners found with score {best_score:.2f}:")
+        print(f"\n Best corners found with score {best_score:.2f}:")
         print(f"   {best_corners}")
         return best_corners
     else:
-        print(f"\n❌ No valid corners found")
+        print(f"\n No valid corners found")
         return None
 
 def detect_chessboard_corners(image):
@@ -330,7 +330,7 @@ def validate_corners(image, corners):
 
 def main():
     """Run board warping analysis"""
-    print("🚀 BOARD WARPING ANALYSIS")
+    print(" BOARD WARPING ANALYSIS")
     print("=" * 70)
     
     # Analyze current warping
@@ -340,10 +340,10 @@ def main():
     improved_corners = create_improved_board_detector()
     
     if improved_corners is not None:
-        print(f"\n✅ Improved corner detection successful")
+        print(f"\n Improved corner detection successful")
         print(f"Next step: Implement these corners in the mapper")
     else:
-        print(f"\n❌ Need to investigate corner detection further")
+        print(f"\n Need to investigate corner detection further")
 
 if __name__ == "__main__":
     main()

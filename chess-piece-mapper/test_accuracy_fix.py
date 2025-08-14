@@ -8,7 +8,7 @@ from src.accuracy_fixed_mapper import AccuracyFixedMapper
 
 def test_accuracy_improvements():
     """Test accuracy improvements with multiple images"""
-    print("🧪 TESTING ACCURACY IMPROVEMENTS")
+    print(" TESTING ACCURACY IMPROVEMENTS")
     print("=" * 60)
     
     # Initialize components
@@ -30,7 +30,7 @@ def test_accuracy_improvements():
     total_accuracy = 0.0
     successful_tests = 0
     
-    print(f"\n🔍 Testing on {len(test_images)} images:")
+    print(f"\n Testing on {len(test_images)} images:")
     for image_id in test_images:
         result = data_loader.process_image_optimized(image_id)
         
@@ -59,7 +59,7 @@ def test_accuracy_improvements():
                         norm_pred = fixed_mapper.normalize_piece_type(predicted)
                         norm_actual = fixed_mapper.normalize_piece_type(actual)
                         correct = norm_pred == norm_actual
-                        status = "✓" if correct else "❌"
+                        status = "✓" if correct else ""
                         print(f"      {square}: {predicted} -> {actual} {status}")
             else:
                 print(f"  Image {image_id}: No pieces or ground truth")
@@ -68,23 +68,23 @@ def test_accuracy_improvements():
     
     if successful_tests > 0:
         avg_accuracy = total_accuracy / successful_tests
-        print(f"\n📊 RESULTS SUMMARY:")
+        print(f"\n RESULTS SUMMARY:")
         print(f"  Average accuracy: {avg_accuracy:.1%}")
         print(f"  Successful tests: {successful_tests}/{len(test_images)}")
         
         if avg_accuracy >= 0.5:
-            print(f"  🎉 SUCCESS: Achieved ≥50% accuracy target!")
+            print(f"   SUCCESS: Achieved ≥50% accuracy target!")
         else:
-            print(f"  ⚠️  Still below 50% target, needs more fixes")
+            print(f"  ️  Still below 50% target, needs more fixes")
         
         return avg_accuracy
     else:
-        print(f"  ❌ No successful tests")
+        print(f"   No successful tests")
         return 0.0
 
 def compare_before_after():
     """Compare accuracy before and after fixes"""
-    print(f"\n📈 BEFORE vs AFTER COMPARISON:")
+    print(f"\n BEFORE vs AFTER COMPARISON:")
     print("=" * 60)
     
     from src.optimized_mapper import OptimizedPieceMapper
@@ -133,7 +133,7 @@ def compare_before_after():
 
 def main():
     """Run accuracy improvement tests"""
-    print("🚀 CHESS PIECE MAPPING - ACCURACY IMPROVEMENT TEST")
+    print(" CHESS PIECE MAPPING - ACCURACY IMPROVEMENT TEST")
     print("=" * 70)
     
     # Test the improvements
@@ -142,18 +142,18 @@ def main():
     # Compare before and after
     compare_before_after()
     
-    print(f"\n🎯 ACCURACY IMPROVEMENT SUMMARY:")
+    print(f"\n ACCURACY IMPROVEMENT SUMMARY:")
     print("=" * 70)
     print("Key fixes implemented:")
-    print("  ✅ Fixed Y-coordinate inversion (ranks now correctly oriented)")
-    print("  ✅ Normalized piece type matching (WhitePawn2 -> WhitePawn1)")
-    print("  ✅ Improved chess logic bonuses for piece placement")
-    print("  ✅ Lower cost threshold for better assignment acceptance")
+    print("   Fixed Y-coordinate inversion (ranks now correctly oriented)")
+    print("   Normalized piece type matching (WhitePawn2 -> WhitePawn1)")
+    print("   Improved chess logic bonuses for piece placement")
+    print("   Lower cost threshold for better assignment acceptance")
     
     if accuracy >= 0.5:
-        print(f"\n🎉 TARGET ACHIEVED: {accuracy:.1%} accuracy (≥50% target)")
+        print(f"\n TARGET ACHIEVED: {accuracy:.1%} accuracy (≥50% target)")
     else:
-        print(f"\n🔧 Still working towards 50% target (current: {accuracy:.1%})")
+        print(f"\n Still working towards 50% target (current: {accuracy:.1%})")
 
 if __name__ == "__main__":
     main()

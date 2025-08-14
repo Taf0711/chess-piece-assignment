@@ -22,15 +22,15 @@ bproc.init()
 
 def _force_optix_gpu_only():
     """EXTREMELY AGGRESSIVE GPU-ONLY CONFIGURATION"""
-    print("🔥 === EXTREME GPU-ONLY CONFIGURATION ===")
+    print(" === EXTREME GPU-ONLY CONFIGURATION ===")
     
     # Force Cycles engine
     bpy.context.scene.render.engine = "CYCLES"
-    print(f"✅ Render engine: {bpy.context.scene.render.engine}")
+    print(f" Render engine: {bpy.context.scene.render.engine}")
 
     # FORCE GPU-ONLY RENDERING
     bpy.context.scene.cycles.device = "GPU"
-    print(f"✅ Cycles device: {bpy.context.scene.cycles.device}")
+    print(f" Cycles device: {bpy.context.scene.cycles.device}")
 
     # Get preferences
     prefs = bpy.context.preferences.addons["cycles"].preferences
@@ -38,13 +38,13 @@ def _force_optix_gpu_only():
     # Refresh devices
     try:
         prefs.refresh_devices()
-        print("✅ Refreshed devices")
+        print(" Refreshed devices")
     except Exception as e:
-        print(f"⚠️  Device refresh failed: {e}")
+        print(f"️  Device refresh failed: {e}")
 
     # FORCE OPTIX (better GPU utilization than CUDA for RTX)
     prefs.compute_device_type = "OPTIX"
-    print(f"🚀 Set compute device type to: {prefs.compute_device_type}")
+    print(f" Set compute device type to: {prefs.compute_device_type}")
 
     # AGGRESSIVELY DISABLE ALL CPU AND ENABLE ALL GPU
     gpu_enabled = False
@@ -58,27 +58,27 @@ def _force_optix_gpu_only():
         if dev_type == "CPU":
             d.use = False
             cpu_disabled = True
-            print(f"❌ DISABLED CPU: {name}")
+            print(f" DISABLED CPU: {name}")
         elif dev_type in ("CUDA", "OPTIX"):
             d.use = True
             gpu_enabled = True
-            print(f"✅ ENABLED GPU: {name}")
+            print(f" ENABLED GPU: {name}")
         else:
             d.use = False
-            print(f"❌ DISABLED OTHER: {name}")
+            print(f" DISABLED OTHER: {name}")
     
     if not gpu_enabled:
         print("💥 ERROR: NO GPU DEVICES ENABLED!")
         return False
         
     if not cpu_disabled:
-        print("⚠️  WARNING: CPU NOT DISABLED!")
+        print("️  WARNING: CPU NOT DISABLED!")
 
     # FORCE ENVIRONMENT VARIABLES
     os.environ["CYCLES_RENDER_DEVICE"] = "OPTIX"
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
     os.environ["CYCLES_CPU_THREADS"] = "0"
-    print("🔧 Set environment variables for GPU-only")
+    print(" Set environment variables for GPU-only")
 
     # DISABLE ALL CPU THREADS IN BLENDER
     bpy.context.scene.render.threads_mode = 'FIXED'
@@ -88,9 +88,9 @@ def _force_optix_gpu_only():
     # FORCE VIEWPORT TO USE GPU TOO
     try:
         bpy.context.scene.cycles.preview_compute_device = "GPU"
-        print("✅ Set preview compute device to GPU")
+        print(" Set preview compute device to GPU")
     except AttributeError:
-        print("⚠️  Preview compute device not available")
+        print("️  Preview compute device not available")
     
     # VERIFY FINAL CONFIGURATION
     enabled_gpus = []
@@ -107,16 +107,16 @@ def _force_optix_gpu_only():
             elif dev_type in ("CUDA", "OPTIX"):
                 enabled_gpus.append(name)
     
-    print(f"🔥 === FINAL VERIFICATION ===")
-    print(f"✅ GPU devices enabled: {enabled_gpus}")
-    print(f"❌ CPU devices enabled: {enabled_cpus}")
-    print(f"🎯 Engine: {bpy.context.scene.render.engine}")
-    print(f"🎯 Device: {bpy.context.scene.cycles.device}")
-    print(f"🎯 Compute type: {prefs.compute_device_type}")
-    print(f"🎯 CPU threads: {bpy.context.scene.render.threads}")
+    print(f" === FINAL VERIFICATION ===")
+    print(f" GPU devices enabled: {enabled_gpus}")
+    print(f" CPU devices enabled: {enabled_cpus}")
+    print(f" Engine: {bpy.context.scene.render.engine}")
+    print(f" Device: {bpy.context.scene.cycles.device}")
+    print(f" Compute type: {prefs.compute_device_type}")
+    print(f" CPU threads: {bpy.context.scene.render.threads}")
     
     success = len(enabled_gpus) > 0 and len(enabled_cpus) == 0
-    print(f"🎯 GPU-ONLY SUCCESS: {success}")
+    print(f" GPU-ONLY SUCCESS: {success}")
     
     return success
 
@@ -173,11 +173,11 @@ def monitor_gpu_and_cpu():
                 avg_gpu = sum(gpu_utilization_history) / len(gpu_utilization_history)
                 avg_cpu = sum(cpu_utilization_history) / len(cpu_utilization_history) if cpu_utilization_history else 0
                 
-                print(f"🔥 GPU: {gpu_util}% util, {gpu_temp}°C, {gpu_power}W (avg: {avg_gpu:.1f}%)")
+                print(f" GPU: {gpu_util}% util, {gpu_temp}°C, {gpu_power}W (avg: {avg_gpu:.1f}%)")
                 print(f"💻 CPU: {cpu_util:.1f}% (avg: {avg_cpu:.1f}%) - SHOULD BE LOW!")
                 
                 if avg_cpu > 50:
-                    print(f"⚠️  WARNING: HIGH CPU USAGE - GPU NOT BEING USED PROPERLY!")
+                    print(f"️  WARNING: HIGH CPU USAGE - GPU NOT BEING USED PROPERLY!")
                     
         except Exception as e:
             print(f"Monitoring error: {e}")
@@ -187,7 +187,7 @@ def monitor_gpu_and_cpu():
 # Start monitoring
 gpu_monitor_thread = threading.Thread(target=monitor_gpu_and_cpu, daemon=True)
 gpu_monitor_thread.start()
-print("🔥 AGGRESSIVE GPU+CPU MONITORING STARTED")
+print(" AGGRESSIVE GPU+CPU MONITORING STARTED")
 
 # EXTREME RENDER SETTINGS FOR MAXIMUM GPU LOAD
 bproc.renderer.set_max_amount_of_samples(1024)  # VERY HIGH SAMPLES
@@ -323,17 +323,17 @@ light.set_energy(2000.0)  # HIGHER ENERGY = MORE GPU WORK
 # HIGH RESOLUTION FOR MORE GPU LOAD
 bproc.camera.set_resolution(1280, 960)  # HIGHER RESOLUTION
 bproc.renderer.set_output_format(enable_transparency=True)
-print("🎯 HIGH RESOLUTION:", bproc.camera.get_intrinsics_as_K_matrix())
+print(" HIGH RESOLUTION:", bproc.camera.get_intrinsics_as_K_matrix())
 
 # AGGRESSIVE TEST PARAMETERS - FEWER SETUPS BUT MAXIMUM GPU LOAD
 N = 8  # More cameras per setup
 num_random_setup = 20  # Fewer setups but EXTREME GPU load per setup
 
-print(f"🔥 === AGGRESSIVE GPU-ONLY TEST ===")
-print(f"📸 Generating {num_random_setup} setups × {N} cameras = {N * num_random_setup} total images")
+print(f" === AGGRESSIVE GPU-ONLY TEST ===")
+print(f" Generating {num_random_setup} setups × {N} cameras = {N * num_random_setup} total images")
 print(f"📏 Resolution: 1280×960")
 print(f"🎲 Samples: 1024+ per render")
-print(f"🎯 Target: 70-80% GPU, <20% CPU")
+print(f" Target: 70-80% GPU, <20% CPU")
 
 # Setup cameras
 golden_angle = np.pi * (3 - np.sqrt(5))
@@ -359,7 +359,7 @@ reader = csv.reader(csv_file)
 next(reader, None)
 fen_rows = iter(reader)
 
-print("🚀 Starting AGGRESSIVE GPU-ONLY data generation...")
+print(" Starting AGGRESSIVE GPU-ONLY data generation...")
 start_time = time.time()
 
 for z in range(num_random_setup):
@@ -379,8 +379,8 @@ for z in range(num_random_setup):
     current_cpu = cpu_utilization_history[-1] if cpu_utilization_history else 0
     avg_cpu = sum(cpu_utilization_history) / len(cpu_utilization_history) if cpu_utilization_history else 0
     
-    print(f"\n🔥 === AGGRESSIVE RENDER {z+1}/{num_random_setup} ===")
-    print(f"🎯 GPU: {current_gpu}% (avg: {avg_gpu:.1f}%) | CPU: {current_cpu:.1f}% (avg: {avg_cpu:.1f}%)")
+    print(f"\n === AGGRESSIVE RENDER {z+1}/{num_random_setup} ===")
+    print(f" GPU: {current_gpu}% (avg: {avg_gpu:.1f}%) | CPU: {current_cpu:.1f}% (avg: {avg_cpu:.1f}%)")
     print(f"🎲 Using FEN: {fen}")
     
     # EXTREME dynamic sample adjustment
@@ -388,16 +388,16 @@ for z in range(num_random_setup):
     if avg_gpu < 60:
         new_samples = min(current_samples + 128, 2048)  # HUGE JUMPS
         bproc.renderer.set_max_amount_of_samples(new_samples)
-        print(f"📈 GPU LOW - EXTREME increase to {new_samples} samples")
+        print(f" GPU LOW - EXTREME increase to {new_samples} samples")
     elif avg_gpu > 90:
         new_samples = max(current_samples - 64, 512)
         bproc.renderer.set_max_amount_of_samples(new_samples)
-        print(f"📉 GPU HIGH - reducing to {new_samples} samples")
+        print(f" GPU HIGH - reducing to {new_samples} samples")
     else:
-        print(f"✅ GPU utilization acceptable: {avg_gpu:.1f}%")
+        print(f" GPU utilization acceptable: {avg_gpu:.1f}%")
     
     if avg_cpu > 30:
-        print(f"⚠️  HIGH CPU USAGE: {avg_cpu:.1f}% - GPU NOT BEING USED PROPERLY!")
+        print(f"️  HIGH CPU USAGE: {avg_cpu:.1f}% - GPU NOT BEING USED PROPERLY!")
     
     # Setup chess position
     pos = parse_fen(fen)
@@ -431,21 +431,21 @@ for z in range(num_random_setup):
     render_time = time.time() - render_start
     setup_time = time.time() - setup_start
     
-    print(f"✅ Setup {z+1} complete in {setup_time:.2f}s (render: {render_time:.2f}s)")
+    print(f" Setup {z+1} complete in {setup_time:.2f}s (render: {render_time:.2f}s)")
     
     # Show recent GPU/CPU stats
     if len(gpu_utilization_history) >= 5:
         recent_gpu = sum(gpu_utilization_history[-5:]) / 5
         recent_cpu = sum(cpu_utilization_history[-5:]) / 5 if len(cpu_utilization_history) >= 5 else 0
-        print(f"📊 Recent averages - GPU: {recent_gpu:.1f}%, CPU: {recent_cpu:.1f}%")
+        print(f" Recent averages - GPU: {recent_gpu:.1f}%, CPU: {recent_cpu:.1f}%")
 
 # STOP MONITORING
 gpu_monitor_running = False
 total_time = time.time() - start_time
 
-print(f"\n🎉 === AGGRESSIVE GPU TEST COMPLETE ===")
-print(f"⏱️  Total time: {total_time:.1f} seconds")
-print(f"📸 Images rendered: {N * num_random_setup}")
+print(f"\n === AGGRESSIVE GPU TEST COMPLETE ===")
+print(f"⏱  Total time: {total_time:.1f} seconds")
+print(f" Images rendered: {N * num_random_setup}")
 
 if gpu_utilization_history and cpu_utilization_history:
     final_gpu = sum(gpu_utilization_history) / len(gpu_utilization_history)
@@ -453,17 +453,17 @@ if gpu_utilization_history and cpu_utilization_history:
     max_gpu = max(gpu_utilization_history)
     max_cpu = max(cpu_utilization_history)
     
-    print(f"📊 FINAL RESULTS:")
-    print(f"   🎯 GPU Average: {final_gpu:.1f}% (Peak: {max_gpu}%)")
+    print(f" FINAL RESULTS:")
+    print(f"    GPU Average: {final_gpu:.1f}% (Peak: {max_gpu}%)")
     print(f"   💻 CPU Average: {final_cpu:.1f}% (Peak: {max_cpu:.1f}%)")
     
     if final_gpu >= 60 and final_cpu < 30:
-        print(f"🎉 SUCCESS: GPU-DOMINANT RENDERING ACHIEVED!")
+        print(f" SUCCESS: GPU-DOMINANT RENDERING ACHIEVED!")
     elif final_cpu > final_gpu:
         print(f"💥 PROBLEM: CPU USAGE ({final_cpu:.1f}%) > GPU USAGE ({final_gpu:.1f}%)")
         print(f"💡 SOLUTION NEEDED: Blender still using CPU despite configuration")
     else:
-        print(f"⚠️  MIXED: GPU working but needs more optimization")
+        print(f"️  MIXED: GPU working but needs more optimization")
 
-print(f"🚀 RTX 5090 GPU-ONLY TEST COMPLETE!")
+print(f" RTX 5090 GPU-ONLY TEST COMPLETE!")
 csv_file.close()

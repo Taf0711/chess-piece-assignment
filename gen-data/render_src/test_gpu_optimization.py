@@ -91,7 +91,7 @@ def monitor_gpu():
                     gpu_utilization_history.pop(0)
                 
                 avg_util = sum(gpu_utilization_history) / len(gpu_utilization_history)
-                print(f"🔥 GPU: {gpu_util}% util, {gpu_temp}°C, {gpu_power}W (avg: {avg_util:.1f}%)")
+                print(f" GPU: {gpu_util}% util, {gpu_temp}°C, {gpu_power}W (avg: {avg_util:.1f}%)")
                 
         except Exception as e:
             print(f"GPU monitoring error: {e}")
@@ -101,7 +101,7 @@ def monitor_gpu():
 # Start monitoring
 gpu_monitor_thread = threading.Thread(target=monitor_gpu, daemon=True)
 gpu_monitor_thread.start()
-print("🔥 GPU TEST MONITORING STARTED")
+print(" GPU TEST MONITORING STARTED")
 
 # TEST CONFIGURATION - MINIMAL WORKLOAD
 bproc.renderer.set_max_amount_of_samples(256)  # Start with 256 samples
@@ -118,9 +118,9 @@ os.makedirs(output_path, exist_ok=True)
 N = 3           # 3 cameras per setup
 num_random_setup = 5  # Only 5 setups for testing
 
-print(f"🧪 === GPU OPTIMIZATION TEST ===")
-print(f"📸 Generating {num_random_setup} setups × {N} cameras = {N * num_random_setup} total images")
-print(f"🎯 Target GPU utilization: 70-80%")
+print(f" === GPU OPTIMIZATION TEST ===")
+print(f" Generating {num_random_setup} setups × {N} cameras = {N * num_random_setup} total images")
+print(f" Target GPU utilization: 70-80%")
 print(f"⚡ This test will run for ~2-3 minutes")
 
 # Minimal setup - just test GPU utilization
@@ -145,7 +145,7 @@ for i in range(N):
     bproc.camera.add_camera_pose(cam_pose)
 
 # TEST RENDER LOOP
-print("🚀 Starting GPU utilization test...")
+print(" Starting GPU utilization test...")
 start_time = time.time()
 
 for z in range(num_random_setup):
@@ -156,18 +156,18 @@ for z in range(num_random_setup):
     avg_util = sum(gpu_utilization_history) / len(gpu_utilization_history) if gpu_utilization_history else 0
     
     print(f"\n⚡ === TEST RENDER {z+1}/{num_random_setup} ===")
-    print(f"🔥 Current GPU: {current_util}% | Average: {avg_util:.1f}%")
+    print(f" Current GPU: {current_util}% | Average: {avg_util:.1f}%")
     
     # Dynamic sample adjustment like in main script
     current_samples = bpy.context.scene.cycles.samples
     if avg_util < 60:
         new_samples = min(current_samples + 32, 512)
         bproc.renderer.set_max_amount_of_samples(new_samples)
-        print(f"📈 Increasing samples to {new_samples} (low GPU util)")
+        print(f" Increasing samples to {new_samples} (low GPU util)")
     elif avg_util > 85:
         new_samples = max(current_samples - 32, 128)
         bproc.renderer.set_max_amount_of_samples(new_samples)
-        print(f"📉 Reducing samples to {new_samples} (high GPU util)")
+        print(f" Reducing samples to {new_samples} (high GPU util)")
     
     # Render
     render_start = time.time()
@@ -175,7 +175,7 @@ for z in range(num_random_setup):
     render_time = time.time() - render_start
     
     setup_time = time.time() - setup_start
-    print(f"✅ Setup {z+1} complete in {setup_time:.2f}s (render: {render_time:.2f}s)")
+    print(f" Setup {z+1} complete in {setup_time:.2f}s (render: {render_time:.2f}s)")
 
 # STOP MONITORING
 gpu_monitor_running = False
@@ -187,22 +187,22 @@ if gpu_utilization_history:
     max_util = max(gpu_utilization_history)
     min_util = min(gpu_utilization_history)
     
-    print(f"\n🎉 === GPU OPTIMIZATION TEST COMPLETE ===")
-    print(f"⏱️  Total test time: {total_time:.1f} seconds")
-    print(f"📊 GPU Utilization Results:")
-    print(f"   🎯 Target: 70-80%")
-    print(f"   📈 Average: {final_avg:.1f}%")
-    print(f"   🔥 Peak: {max_util}%")
-    print(f"   📉 Minimum: {min_util}%")
+    print(f"\n === GPU OPTIMIZATION TEST COMPLETE ===")
+    print(f"⏱  Total test time: {total_time:.1f} seconds")
+    print(f" GPU Utilization Results:")
+    print(f"    Target: 70-80%")
+    print(f"    Average: {final_avg:.1f}%")
+    print(f"    Peak: {max_util}%")
+    print(f"    Minimum: {min_util}%")
     
     if 70 <= final_avg <= 80:
-        print(f"✅ SUCCESS: GPU utilization is in target range!")
+        print(f" SUCCESS: GPU utilization is in target range!")
     elif final_avg < 70:
-        print(f"⚠️  LOW: GPU utilization below target (increase samples/complexity)")
+        print(f"️  LOW: GPU utilization below target (increase samples/complexity)")
     else:
-        print(f"🔥 HIGH: GPU utilization above target (decrease samples)")
+        print(f" HIGH: GPU utilization above target (decrease samples)")
         
-    print(f"🚀 Optimization test complete - ready for full generation!")
+    print(f" Optimization test complete - ready for full generation!")
 
 else:
-    print("❌ No GPU data collected during test")
+    print(" No GPU data collected during test")

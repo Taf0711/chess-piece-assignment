@@ -34,7 +34,7 @@ for cat in coco["categories"]:
     base_name = re.sub(r'\d+$', '', cat["name"])  # "WhitePawn8" → "WhitePawn"
     short = SHORTHAND.get(base_name)
     if short is None:
-        print(f"⚠️  Unrecognized category base name: {base_name}")
+        print(f"️  Unrecognized category base name: {base_name}")
         short = base_name  # fallback
     old_to_short[cat["name"]] = short
 
@@ -70,4 +70,4 @@ coco["categories"] = new_categories
 with open(coco_path, "w") as f:
     json.dump(coco, f, indent=2)
 
-print("✅ COCO categories renamed using shorthand.")
+print(" COCO categories renamed using shorthand.")

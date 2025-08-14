@@ -87,7 +87,7 @@ def monitor_gpu():
                     gpu_utilization_history.pop(0)
                 
                 avg_util = sum(gpu_utilization_history) / len(gpu_utilization_history)
-                print(f"🔥 GPU: {gpu_util}% util, {gpu_temp}°C, {gpu_power}W (avg: {avg_util:.1f}%)")
+                print(f" GPU: {gpu_util}% util, {gpu_temp}°C, {gpu_power}W (avg: {avg_util:.1f}%)")
                 
         except Exception as e:
             print(f"GPU monitoring error: {e}")
@@ -97,7 +97,7 @@ def monitor_gpu():
 # Start intensive monitoring
 gpu_monitor_thread = threading.Thread(target=monitor_gpu, daemon=True)
 gpu_monitor_thread.start()
-print("🔥 INTENSIVE GPU MONITORING STARTED")
+print(" INTENSIVE GPU MONITORING STARTED")
 
 # AGGRESSIVE RENDER SETTINGS FOR HIGH GPU LOAD
 bproc.renderer.set_max_amount_of_samples(512)  # Start with high samples
@@ -114,11 +114,11 @@ os.makedirs(output_path, exist_ok=True)
 N = 8           # More cameras per setup
 num_setups = 10  # More setups for sustained load
 
-print(f"🔥 === INTENSIVE GPU UTILIZATION TEST ===")
-print(f"📸 Generating {num_setups} setups × {N} cameras = {N * num_setups} total images")
-print(f"🎯 Target GPU utilization: 70-80%")
+print(f" === INTENSIVE GPU UTILIZATION TEST ===")
+print(f" Generating {num_setups} setups × {N} cameras = {N * num_setups} total images")
+print(f" Target GPU utilization: 70-80%")
 print(f"⚡ This intensive test will run for ~5-10 minutes")
-print(f"🔥 Using AGGRESSIVE render settings")
+print(f" Using AGGRESSIVE render settings")
 
 # HIGHER RESOLUTION AND COMPLEX LIGHTING
 bproc.camera.set_resolution(1024, 768)  # Higher resolution = more GPU work
@@ -154,7 +154,7 @@ for i in range(N):
     camera_info[i] = {"dist": rho, "pos": pos.tolist()}
 
 # INTENSIVE RENDER LOOP
-print("🚀 Starting INTENSIVE GPU utilization test...")
+print(" Starting INTENSIVE GPU utilization test...")
 start_time = time.time()
 
 for z in range(num_setups):
@@ -173,21 +173,21 @@ for z in range(num_setups):
     current_util = gpu_utilization_history[-1] if gpu_utilization_history else 0
     avg_util = sum(gpu_utilization_history) / len(gpu_utilization_history) if gpu_utilization_history else 0
     
-    print(f"\n🔥 === INTENSIVE RENDER {z+1}/{num_setups} ===")
-    print(f"🎯 Current GPU: {current_util}% | Rolling Avg: {avg_util:.1f}%")
+    print(f"\n === INTENSIVE RENDER {z+1}/{num_setups} ===")
+    print(f" Current GPU: {current_util}% | Rolling Avg: {avg_util:.1f}%")
     
     # AGGRESSIVE dynamic sample adjustment
     current_samples = bpy.context.scene.cycles.samples
     if avg_util < 65:  # More aggressive threshold for higher utilization
         new_samples = min(current_samples + 64, 1024)  # Bigger jumps
         bproc.renderer.set_max_amount_of_samples(new_samples)
-        print(f"📈 LOW GPU - Increasing samples to {new_samples}")
+        print(f" LOW GPU - Increasing samples to {new_samples}")
     elif avg_util > 85:
         new_samples = max(current_samples - 32, 256)
         bproc.renderer.set_max_amount_of_samples(new_samples)
-        print(f"📉 HIGH GPU - Reducing samples to {new_samples}")
+        print(f" HIGH GPU - Reducing samples to {new_samples}")
     else:
-        print(f"✅ GPU utilization in target range: {avg_util:.1f}%")
+        print(f" GPU utilization in target range: {avg_util:.1f}%")
     
     # Intensive rendering
     render_start = time.time()
@@ -200,21 +200,21 @@ for z in range(num_setups):
     render_time = time.time() - render_start
     setup_time = time.time() - setup_start
     
-    print(f"✅ Setup {z+1} complete in {setup_time:.2f}s (pure render: {render_time:.2f}s)")
+    print(f" Setup {z+1} complete in {setup_time:.2f}s (pure render: {render_time:.2f}s)")
     
     # Show sustained utilization stats
     if len(gpu_utilization_history) >= 5:
         recent_avg = sum(gpu_utilization_history[-5:]) / 5
-        print(f"📊 Recent 5-second average: {recent_avg:.1f}%")
+        print(f" Recent 5-second average: {recent_avg:.1f}%")
 
 # STOP MONITORING
 gpu_monitor_running = False
 total_time = time.time() - start_time
 
 # COMPREHENSIVE RESULTS
-print(f"\n🎉 === INTENSIVE GPU TEST COMPLETE ===")
-print(f"⏱️  Total test time: {total_time:.1f} seconds ({total_time/60:.1f} minutes)")
-print(f"📸 Total images rendered: {N * num_setups}")
+print(f"\n === INTENSIVE GPU TEST COMPLETE ===")
+print(f"⏱  Total test time: {total_time:.1f} seconds ({total_time/60:.1f} minutes)")
+print(f" Total images rendered: {N * num_setups}")
 
 if gpu_utilization_history:
     final_avg = sum(gpu_utilization_history) / len(gpu_utilization_history)
@@ -225,32 +225,32 @@ if gpu_utilization_history:
     high_util_count = sum(1 for util in gpu_utilization_history if util >= 70)
     sustained_percentage = (high_util_count / len(gpu_utilization_history)) * 100
     
-    print(f"📊 FINAL GPU UTILIZATION ANALYSIS:")
-    print(f"   🎯 Target: 70-80%")
-    print(f"   📈 Overall Average: {final_avg:.1f}%")
-    print(f"   🔥 Peak: {max_util}%")
-    print(f"   📉 Minimum: {min_util}%")
+    print(f" FINAL GPU UTILIZATION ANALYSIS:")
+    print(f"    Target: 70-80%")
+    print(f"    Overall Average: {final_avg:.1f}%")
+    print(f"    Peak: {max_util}%")
+    print(f"    Minimum: {min_util}%")
     print(f"   ⏰ Time at 70%+: {sustained_percentage:.1f}%")
     
     if 70 <= final_avg <= 80:
-        print(f"🎉 SUCCESS: GPU utilization is in optimal range!")
-        print(f"✅ Ready for full production data generation!")
+        print(f" SUCCESS: GPU utilization is in optimal range!")
+        print(f" Ready for full production data generation!")
     elif final_avg < 70:
-        print(f"⚠️  MODERATE: GPU utilization below target")
+        print(f"️  MODERATE: GPU utilization below target")
         print(f"💡 Suggestion: Increase samples or resolution for full generation")
     else:
-        print(f"🔥 EXCELLENT: High GPU utilization achieved!")
-        print(f"✅ Perfect for maximum generation speed!")
+        print(f" EXCELLENT: High GPU utilization achieved!")
+        print(f" Perfect for maximum generation speed!")
         
-    print(f"\n🚀 RTX 5090 PERFORMANCE CONFIRMED!")
+    print(f"\n RTX 5090 PERFORMANCE CONFIRMED!")
     print(f"⚡ Your GPU is working at {final_avg:.1f}% average utilization")
-    print(f"🎯 Optimization successful - ready for large-scale generation!")
+    print(f" Optimization successful - ready for large-scale generation!")
 
 else:
-    print("❌ No GPU monitoring data collected")
+    print(" No GPU monitoring data collected")
 
-print(f"\n🔧 Recommended settings for full generation:")
+print(f"\n Recommended settings for full generation:")
 print(f"   📏 Resolution: 1024×768 or higher") 
 print(f"   🎲 Samples: 512-768 for optimal balance")
-print(f"   📸 Batch size: 8-10 cameras per setup")
+print(f"    Batch size: 8-10 cameras per setup")
 print(f"   ⚡ Expected speed: {(N * num_setups) / (total_time / 60):.0f} images/minute")

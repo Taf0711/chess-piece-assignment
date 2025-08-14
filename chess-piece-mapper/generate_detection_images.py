@@ -13,7 +13,7 @@ from pathlib import Path
 
 def generate_test_detection_images():
     """Generate detection images using test data"""
-    print("🎯 GENERATING CHESS PIECE DETECTION IMAGES")
+    print(" GENERATING CHESS PIECE DETECTION IMAGES")
     print("=" * 60)
     
     # Initialize components
@@ -27,7 +27,7 @@ def generate_test_detection_images():
     # Create synthetic chess board image for demonstration
     board_image = create_synthetic_board_image()
     
-    print(f"📊 Test Data:")
+    print(f" Test Data:")
     print(f"  • {len(test_pieces)} detected pieces")
     print(f"  • {len(assignments)} assignments generated")
     print(f"  • Board image: 256×256 pixels")
@@ -49,12 +49,12 @@ def generate_test_detection_images():
         image_id=999
     )
     
-    print(f"✅ Generated test detection images")
+    print(f" Generated test detection images")
     return detection_viz, single_detection
 
 def generate_real_detection_images():
     """Generate detection images from real dataset"""
-    print("\n🔍 PROCESSING REAL DATASET IMAGES")
+    print("\n PROCESSING REAL DATASET IMAGES")
     print("=" * 60)
     
     # Initialize trainer
@@ -93,12 +93,12 @@ def generate_real_detection_images():
                     image_id=image_id
                 )
         else:
-            print(f"    ❌ Failed: {result.get('error', 'Unknown error')}")
+            print(f"     Failed: {result.get('error', 'Unknown error')}")
     
     # Create summary grid
     if successful_results:
         trainer.visualizer.create_summary_grid(successful_results)
-        print(f"✅ Generated {len(successful_results)} real detection images")
+        print(f" Generated {len(successful_results)} real detection images")
     
     return successful_results
 
@@ -124,7 +124,7 @@ def create_synthetic_board_image() -> np.ndarray:
 
 def create_detection_report():
     """Create a comprehensive detection report"""
-    print("\n📋 DETECTION REPORT GENERATION")
+    print("\n DETECTION REPORT GENERATION")
     print("=" * 60)
     
     results_dir = Path("results/detection_images")
@@ -134,13 +134,13 @@ def create_detection_report():
     single_detections = list(results_dir.glob("single_detection_*.png")) 
     summary_files = list(results_dir.glob("detection_summary.png"))
     
-    print(f"📊 Generated Files:")
+    print(f" Generated Files:")
     print(f"  • Detection visualizations: {len(detection_images)}")
     print(f"  • Single detection overlays: {len(single_detections)}")
     print(f"  • Summary grids: {len(summary_files)}")
     print(f"  • Total output files: {len(detection_images) + len(single_detections) + len(summary_files)}")
     
-    print(f"\n📁 Output Directory:")
+    print(f"\n Output Directory:")
     print(f"  {results_dir.absolute()}")
     
     print(f"\n📄 File Types Generated:")
@@ -157,7 +157,7 @@ def create_detection_report():
 
 def main():
     """Generate all detection images"""
-    print("🚀 CHESS PIECE DETECTION IMAGE GENERATOR")
+    print(" CHESS PIECE DETECTION IMAGE GENERATOR")
     print("=" * 70)
     
     # Create output directory
@@ -172,11 +172,11 @@ def main():
     # Create comprehensive report
     report = create_detection_report()
     
-    print(f"\n🎉 DETECTION IMAGE GENERATION COMPLETE!")
+    print(f"\n DETECTION IMAGE GENERATION COMPLETE!")
     print("=" * 70)
-    print(f"✅ Successfully generated detection visualizations")
-    print(f"📁 All outputs saved to: {report['output_directory']}")
-    print(f"🖼️  Total images: {report['detection_images'] + report['single_detections'] + report['summary_files']}")
+    print(f" Successfully generated detection visualizations")
+    print(f" All outputs saved to: {report['output_directory']}")
+    print(f"️  Total images: {report['detection_images'] + report['single_detections'] + report['summary_files']}")
     print(f"\nNext steps:")
     print(f"  • Check the results/detection_images/ folder for PNG outputs")
     print(f"  • View detection_summary.png for overview")

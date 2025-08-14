@@ -10,7 +10,7 @@ import json
 
 def test_single_image():
     """Test processing of a single image"""
-    print("🔍 TESTING OPTIMIZED SYSTEM")
+    print(" TESTING OPTIMIZED SYSTEM")
     print("=" * 50)
     
     # Initialize components
@@ -20,7 +20,7 @@ def test_single_image():
     
     # Test image processing
     image_id = 0
-    print(f"\n📸 Processing Image {image_id}...")
+    print(f"\n Processing Image {image_id}...")
     
     result = data_loader.process_image_optimized(image_id, debug=True)
     
@@ -28,12 +28,12 @@ def test_single_image():
         pieces = result['pieces']
         ground_truth = result['ground_truth']
         
-        print(f"✅ Image processed successfully:")
+        print(f" Image processed successfully:")
         print(f"  • {len(pieces)} pieces detected")
         print(f"  • {len(ground_truth)} ground truth positions")
         
         # Test assignment
-        print(f"\n🎯 Testing piece assignment...")
+        print(f"\n Testing piece assignment...")
         assignments = mapper.solve_assignment_improved(pieces)
         
         print(f"  • {len(assignments)} assignments made")
@@ -42,12 +42,12 @@ def test_single_image():
         # Test detailed results
         detailed_results = mapper.create_detailed_results(assignments, ground_truth)
         
-        print(f"\n📊 Detailed Results:")
+        print(f"\n Detailed Results:")
         print(f"  Status: {detailed_results['status']}")
         print(f"  Statistics: {detailed_results.get('statistics', {})}")
         
         if detailed_results['status'] == 'success':
-            print(f"\n📋 Sample Assignments:")
+            print(f"\n Sample Assignments:")
             for i, assignment in enumerate(detailed_results['assignments'][:5]):
                 print(f"  {i+1}. {assignment['piece']} → {assignment['square']} "
                       f"(confidence: {assignment['confidence']:.2f}, quality: {assignment['quality']})")
@@ -56,7 +56,7 @@ def test_single_image():
         
     else:
         error = result.get('error', 'Unknown error') if result else 'No result'
-        print(f"❌ Failed to process image: {error}")
+        print(f" Failed to process image: {error}")
         return False
 
 def test_multiple_images():
@@ -97,7 +97,7 @@ def test_multiple_images():
         total_pieces = sum(r['pieces'] for r in successful_results)
         total_assignments = sum(r['assignments'] for r in successful_results)
         
-        print(f"\n📈 Summary Statistics:")
+        print(f"\n Summary Statistics:")
         print(f"  • Successful images: {len(successful_results)}/{len(test_images)}")
         print(f"  • Total pieces detected: {total_pieces}")
         print(f"  • Total assignments made: {total_assignments}")
@@ -131,7 +131,7 @@ def save_test_results(results):
 
 def main():
     """Run optimization tests"""
-    print("🚀 OPTIMIZED CHESS PIECE MAPPING - QUICK TEST")
+    print(" OPTIMIZED CHESS PIECE MAPPING - QUICK TEST")
     print("=" * 70)
     
     # Test single image
@@ -145,20 +145,20 @@ def main():
             # Save results
             save_test_results(results)
             
-            print(f"\n🎉 OPTIMIZATION TEST COMPLETE!")
+            print(f"\n OPTIMIZATION TEST COMPLETE!")
             print("=" * 70)
             print("Key Improvements Verified:")
-            print("  ✅ Improved board corner detection")
-            print("  ✅ Better coordinate transformation")
-            print("  ✅ Adaptive cost function with lower thresholds")
-            print("  ✅ Enhanced assignment success rates")
-            print("  ✅ Detailed, readable results format")
+            print("   Improved board corner detection")
+            print("   Better coordinate transformation")
+            print("   Adaptive cost function with lower thresholds")
+            print("   Enhanced assignment success rates")
+            print("   Detailed, readable results format")
             
             print(f"\nResults show significant improvement over original system!")
         else:
-            print("❌ Multiple image test failed")
+            print(" Multiple image test failed")
     else:
-        print("❌ Single image test failed - check system configuration")
+        print(" Single image test failed - check system configuration")
 
 if __name__ == "__main__":
     main()

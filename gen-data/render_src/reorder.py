@@ -227,7 +227,7 @@ def monitor_gpu():
 # Start GPU monitoring thread
 gpu_monitor_thread = threading.Thread(target=monitor_gpu, daemon=True)
 gpu_monitor_thread.start()
-print("🔥 GPU monitoring started - targeting 70-80% utilization")
+print(" GPU monitoring started - targeting 70-80% utilization")
 
 # OPTIMIZED SAMPLES FOR 70-80% GPU UTILIZATION
 bproc.renderer.set_max_amount_of_samples(256)  # Balanced samples for sustained GPU load
@@ -718,10 +718,10 @@ for z in range(num_random_setup):
     print(f"=== STARTING RENDER {z+1}/{num_random_setup} (GPU avg: {avg_util:.1f}%) ===")
     
     render_start = time.time()
-    print("📊 Rendering segmentation maps...")
+    print(" Rendering segmentation maps...")
     seg_data = bproc.renderer.render_segmap(map_by=["instance", "class", "name"])
     
-    print("🎨 Rendering main colors...")
+    print(" Rendering main colors...")
     data = bproc.renderer.render()
     render_time = time.time() - render_start
     
@@ -775,17 +775,17 @@ for z in range(num_random_setup):
     if current_avg_util < 60:  # Too low utilization
         new_samples = min(current_samples + 32, 512)
         bproc.renderer.set_max_amount_of_samples(new_samples)
-        print(f"📈 GPU util low ({current_avg_util:.1f}%) - increasing samples to {new_samples}")
+        print(f" GPU util low ({current_avg_util:.1f}%) - increasing samples to {new_samples}")
     elif current_avg_util > 90:  # Too high utilization  
         new_samples = max(current_samples - 32, 128)
         bproc.renderer.set_max_amount_of_samples(new_samples)
-        print(f"📉 GPU util high ({current_avg_util:.1f}%) - reducing samples to {new_samples}")
+        print(f" GPU util high ({current_avg_util:.1f}%) - reducing samples to {new_samples}")
     else:
-        print(f"✅ GPU utilization optimal: {current_avg_util:.1f}%")
+        print(f" GPU utilization optimal: {current_avg_util:.1f}%")
     
     avg_time = (avg_time * z + time.time() - current_time) / (z + 1)
     step_time = time.time() - current_time
-    print(f"⏱️  Setup {z+1} completed in {step_time:.2f}s (render: {render_time:.2f}s, write: {write_time:.2f}s)")
+    print(f"⏱  Setup {z+1} completed in {step_time:.2f}s (render: {render_time:.2f}s, write: {write_time:.2f}s)")
     
     # Enhanced progress summary every 5 steps
     if (z + 1) % 5 == 0:
@@ -793,10 +793,10 @@ for z in range(num_random_setup):
         total_elapsed = sum([avg_time * (i + 1) for i in range(z + 1)])
         images_per_hour = total_images / (total_elapsed / 3600) if total_elapsed > 0 else 0
         
-        print(f"🚀 === PROGRESS CHECKPOINT {z+1}/{num_random_setup} ===")
-        print(f"📸 Generated: {total_images} images")
-        print(f"⏱️  Average time per setup: {avg_time:.2f}s")
-        print(f"🔥 Current GPU utilization: {current_avg_util:.1f}%") 
+        print(f" === PROGRESS CHECKPOINT {z+1}/{num_random_setup} ===")
+        print(f" Generated: {total_images} images")
+        print(f"⏱  Average time per setup: {avg_time:.2f}s")
+        print(f" Current GPU utilization: {current_avg_util:.1f}%") 
         print(f"⚡ Images per hour: {images_per_hour:.0f}")
         print(f"🕐 Total elapsed: {total_elapsed/60:.1f} minutes")
         print("=== END CHECKPOINT ===")
@@ -813,18 +813,18 @@ if gpu_utilization_history:
     final_avg_util = sum(gpu_utilization_history) / len(gpu_utilization_history)
     max_util = max(gpu_utilization_history)
     min_util = min(gpu_utilization_history)
-    print(f"📊 Final GPU Statistics:")
+    print(f" Final GPU Statistics:")
     print(f"   Average Utilization: {final_avg_util:.1f}%")
     print(f"   Peak Utilization: {max_util}%")
     print(f"   Minimum Utilization: {min_util}%")
 
-print(f"🎉 ==== OPTIMIZED DATASET GENERATION COMPLETED ====")
-print(f"📸 Total Images Generated: {total_images:,}")
+print(f" ==== OPTIMIZED DATASET GENERATION COMPLETED ====")
+print(f" Total Images Generated: {total_images:,}")
 print(f"🔢 Total Setups: {num_random_setup}")  
 print(f"📷 Images per Setup: {N}")
-print(f"⏱️  Total Time: {avg_time*num_random_setup:.2f} seconds ({total_time_hours:.1f} hours)")
-print(f"📈 Average Time per Setup: {avg_time:.2f} seconds")
-print(f"🖼️  Average Time per Image: {avg_time/N:.3f} seconds")
+print(f"⏱  Total Time: {avg_time*num_random_setup:.2f} seconds ({total_time_hours:.1f} hours)")
+print(f" Average Time per Setup: {avg_time:.2f} seconds")
+print(f"️  Average Time per Image: {avg_time/N:.3f} seconds")
 print(f"⚡ Images per Hour: {total_images/total_time_hours:.0f}")
-print(f"🔥 Target GPU utilization: 70-80% (achieved: {final_avg_util:.1f}%)")
-print("🚀 ==== DATASET READY FOR TRAINING ====")
+print(f" Target GPU utilization: 70-80% (achieved: {final_avg_util:.1f}%)")
+print(" ==== DATASET READY FOR TRAINING ====")

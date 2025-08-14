@@ -250,12 +250,12 @@ def create_text_visualization(image_id, pieces, assignments, ground_truth, evalu
 
 def test_improved_accuracy(test_name: str = "improved_accuracy"):
     """Test improved accuracy system with better algorithms"""
-    print(f"🚀 {test_name.upper().replace('_', ' ')} TEST")
+    print(f" {test_name.upper().replace('_', ' ')} TEST")
     print("=" * 70)
     
     # Create test run folder
     run_folder = create_test_run_folder(test_name)
-    print(f"📁 Results folder: {run_folder}")
+    print(f" Results folder: {run_folder}")
     
     # Load data
     train_path = "/home/pre/projects/chess-datagen/gen-data/render_src/coco_data_2025_08_08__21_53_08/train"
@@ -269,10 +269,10 @@ def test_improved_accuracy(test_name: str = "improved_accuracy"):
         with open(os.path.join(train_path, 'board_placements.json'), 'r') as f:
             board_placements = json.load(f)
             
-        print(f"✅ Loaded {len(coco_data['images'])} images with {len(coco_data['annotations'])} annotations")
+        print(f" Loaded {len(coco_data['images'])} images with {len(coco_data['annotations'])} annotations")
         
     except Exception as e:
-        print(f"❌ Error loading data: {e}")
+        print(f" Error loading data: {e}")
         return False, 0.0, run_folder
     
     # Create category mapping
@@ -287,13 +287,13 @@ def test_improved_accuracy(test_name: str = "improved_accuracy"):
     total_accuracy = 0.0
     successful_tests = 0
     
-    print(f"\n🧪 Testing {len(test_images)} images with improved algorithms...")
+    print(f"\n Testing {len(test_images)} images with improved algorithms...")
     
     for img_data in test_images:
         image_id = img_data['id']
         image_filename = img_data['file_name']
         
-        print(f"\n📸 Image {image_id} ({image_filename}):")
+        print(f"\n Image {image_id} ({image_filename}):")
         
         try:
             # Get annotations for this image
@@ -303,7 +303,7 @@ def test_improved_accuracy(test_name: str = "improved_accuracy"):
             piece_annotations = [ann for ann in image_annotations if categories[ann['category_id']] != 'Board']
             
             if not piece_annotations:
-                print(f"  ⚠️  No piece annotations found")
+                print(f"  ️  No piece annotations found")
                 continue
             
             # Convert annotations to piece objects
@@ -326,30 +326,30 @@ def test_improved_accuracy(test_name: str = "improved_accuracy"):
             # Get ground truth from board placements
             board_key = image_filename
             if board_key not in board_placements:
-                print(f"  ⚠️  No ground truth for {board_key}")
+                print(f"  ️  No ground truth for {board_key}")
                 continue
                 
             board_data = board_placements[board_key]
             fen_string = board_data.get('board')
             
             if not fen_string:
-                print(f"  ⚠️  No FEN string found")
+                print(f"  ️  No FEN string found")
                 continue
                 
             # Parse ground truth positions
             ground_truth = parse_fen_to_pieces(fen_string)
             
             if not ground_truth:
-                print(f"  ⚠️  Could not parse FEN: {fen_string[:30]}...")
+                print(f"  ️  Could not parse FEN: {fen_string[:30]}...")
                 continue
                 
-            print(f"  🏁 Ground truth has {len(ground_truth)} pieces")
+            print(f"   Ground truth has {len(ground_truth)} pieces")
             
             # Create cost matrix and solve assignment
             cost_matrix, squares_with_pieces, piece_list = create_cost_matrix(pieces, ground_truth, square_coords)
             
             if not cost_matrix:
-                print(f"  ⚠️  Could not create cost matrix")
+                print(f"  ️  Could not create cost matrix")
                 continue
             
             # Solve assignment problem
@@ -369,7 +369,7 @@ def test_improved_accuracy(test_name: str = "improved_accuracy"):
                 }
                 assignments.append(assignment)
             
-            print(f"  🎯 Made {len(assignments)} assignments")
+            print(f"   Made {len(assignments)} assignments")
             
             # Evaluate accuracy
             correct = 0
@@ -390,7 +390,7 @@ def test_improved_accuracy(test_name: str = "improved_accuracy"):
                         correct += 1
             
             accuracy = correct / max(1, total)
-            print(f"  📊 Result: {correct}/{total} = {accuracy:.1%}")
+            print(f"   Result: {correct}/{total} = {accuracy:.1%}")
             
             # Create evaluation dict
             evaluation = {
@@ -401,7 +401,7 @@ def test_improved_accuracy(test_name: str = "improved_accuracy"):
             
             # Create visualization
             viz_path = create_text_visualization(image_id, pieces, assignments, ground_truth, evaluation, run_folder)
-            print(f"  🖼️  Visualization: {viz_path}")
+            print(f"  ️  Visualization: {viz_path}")
             
             if accuracy > 0:
                 total_accuracy += accuracy
@@ -419,7 +419,7 @@ def test_improved_accuracy(test_name: str = "improved_accuracy"):
                         correct_examples.append(f"{square}:{predicted[:6]}")
                 
                 if correct_examples:
-                    print(f"  ✅ Correct: {', '.join(correct_examples[:3])}")
+                    print(f"   Correct: {', '.join(correct_examples[:3])}")
             
             # Store result
             results.append({
@@ -435,7 +435,7 @@ def test_improved_accuracy(test_name: str = "improved_accuracy"):
             })
             
         except Exception as e:
-            print(f"  ❌ Error processing image {image_id}: {str(e)}")
+            print(f"   Error processing image {image_id}: {str(e)}")
     
     # Calculate final results
     if successful_tests > 0:
@@ -443,19 +443,19 @@ def test_improved_accuracy(test_name: str = "improved_accuracy"):
         best_result = max(results, key=lambda x: x['accuracy'])
         worst_result = min(results, key=lambda x: x['accuracy'])
         
-        print(f"\n📊 {test_name.upper().replace('_', ' ')} RESULTS:")
+        print(f"\n {test_name.upper().replace('_', ' ')} RESULTS:")
         print("=" * 70)
-        print(f"🎯 Average Accuracy: {avg_accuracy:.1%}")
-        print(f"📈 Successful Tests: {successful_tests}/{len(test_images)}")
-        print(f"🏆 Best Result: {best_result['accuracy']:.1%} (Image {best_result['image_id']})")
-        print(f"📉 Worst Result: {worst_result['accuracy']:.1%} (Image {worst_result['image_id']})")
+        print(f" Average Accuracy: {avg_accuracy:.1%}")
+        print(f" Successful Tests: {successful_tests}/{len(test_images)}")
+        print(f" Best Result: {best_result['accuracy']:.1%} (Image {best_result['image_id']})")
+        print(f" Worst Result: {worst_result['accuracy']:.1%} (Image {worst_result['image_id']})")
         
         # Progress towards 50%
         progress = (avg_accuracy / 0.5) * 100
-        print(f"📈 Progress towards 50% target: {progress:.1f}%")
+        print(f" Progress towards 50% target: {progress:.1f}%")
         
         # Detailed breakdown
-        print(f"\n📋 Detailed Results:")
+        print(f"\n Detailed Results:")
         for result in results[:15]:  # Show first 15
             print(f"  Image {result['image_id']:3d}: {result['accuracy']:5.1%} "
                   f"({result['correct']:2d}/{result['total']:2d}) - "
@@ -488,17 +488,17 @@ def test_improved_accuracy(test_name: str = "improved_accuracy"):
         with open(report_path, 'w') as f:
             json.dump(report, f, indent=2)
         
-        print(f"\n📝 Comprehensive report saved: {report_path}")
-        print(f"🖼️  Visualizations saved in: {run_folder}/visualizations/")
+        print(f"\n Comprehensive report saved: {report_path}")
+        print(f"️  Visualizations saved in: {run_folder}/visualizations/")
         
         return True, avg_accuracy, run_folder
     else:
-        print(f"\n❌ No successful tests completed")
+        print(f"\n No successful tests completed")
         return False, 0.0, run_folder
 
 def run_parameter_optimization():
     """Test different parameter combinations to optimize accuracy"""
-    print("🔧 PARAMETER OPTIMIZATION - SYSTEMATIC TESTING")
+    print(" PARAMETER OPTIMIZATION - SYSTEMATIC TESTING")
     print("=" * 80)
     
     # Test different distance thresholds and cost function weights
@@ -514,7 +514,7 @@ def run_parameter_optimization():
     all_results = {}
     
     for config in test_configs:
-        print(f"\n🧪 Testing configuration: {config['name']}")
+        print(f"\n Testing configuration: {config['name']}")
         print(f"   Distance threshold: {config['distance_threshold']} pixels")
         print(f"   Piece type bonus: {config['piece_type_bonus']}")
         
@@ -534,19 +534,19 @@ def run_parameter_optimization():
         
         print(f"   Result: {accuracy:.1%}")
     
-    print(f"\n🏆 PARAMETER OPTIMIZATION RESULTS:")
+    print(f"\n PARAMETER OPTIMIZATION RESULTS:")
     print("=" * 80)
     print(f"🥇 Best configuration: {best_config['name']} → {best_accuracy:.1%}")
     
     for name, result in all_results.items():
-        status = "🥇" if result['accuracy'] == best_accuracy else "📊"
+        status = "🥇" if result['accuracy'] == best_accuracy else ""
         print(f"   {status} {name}: {result['accuracy']:.1%}")
     
     return best_accuracy, best_config, all_results
 
 def main():
     """Run comprehensive accuracy improvement tests"""
-    print("🚀 ADVANCED CHESS PIECE MAPPING ACCURACY SYSTEM")
+    print(" ADVANCED CHESS PIECE MAPPING ACCURACY SYSTEM")
     print("=" * 90)
     
     # Test 1: Improved basic accuracy
@@ -560,33 +560,33 @@ def main():
     
     # Final summary
     print("\n" + "="*90)
-    print("🏁 COMPREHENSIVE ACCURACY IMPROVEMENT SUMMARY:")
+    print(" COMPREHENSIVE ACCURACY IMPROVEMENT SUMMARY:")
     print("=" * 90)
-    print(f"📊 Baseline (previous): 9.4%")
-    print(f"📈 Phase 1 (improved): {accuracy1:.1%}")
-    print(f"🎯 Phase 2 (optimized): {best_accuracy:.1%}")
-    print(f"🏆 Target: 50.0%")
+    print(f" Baseline (previous): 9.4%")
+    print(f" Phase 1 (improved): {accuracy1:.1%}")
+    print(f" Phase 2 (optimized): {best_accuracy:.1%}")
+    print(f" Target: 50.0%")
     
     current_best = max(accuracy1, best_accuracy)
     progress = (current_best / 0.5) * 100
-    print(f"📈 Current progress: {progress:.1f}% towards target")
+    print(f" Current progress: {progress:.1f}% towards target")
     
     if current_best >= 0.5:
-        print(f"🎉 TARGET ACHIEVED! Accuracy: {current_best:.1%} ≥ 50%")
+        print(f" TARGET ACHIEVED! Accuracy: {current_best:.1%} ≥ 50%")
     elif current_best >= 0.3:
-        print(f"📈 SIGNIFICANT PROGRESS: {current_best:.1%} (approaching target)")
+        print(f" SIGNIFICANT PROGRESS: {current_best:.1%} (approaching target)")
     elif current_best >= 0.15:
-        print(f"📊 GOOD PROGRESS: {current_best:.1%} (meaningful improvement)")
+        print(f" GOOD PROGRESS: {current_best:.1%} (meaningful improvement)")
     else:
-        print(f"🔧 INCREMENTAL PROGRESS: {current_best:.1%} (continued optimization needed)")
+        print(f" INCREMENTAL PROGRESS: {current_best:.1%} (continued optimization needed)")
     
-    print(f"\n✅ All test runs organized in dated folders:")
-    print(f"   📁 Phase 1: {folder1}")
+    print(f"\n All test runs organized in dated folders:")
+    print(f"    Phase 1: {folder1}")
     for name, result in param_results.items():
-        print(f"   📁 {name}: {result['run_folder']}")
+        print(f"    {name}: {result['run_folder']}")
     
-    print(f"\n🖼️  Visualizations created for each test run")
-    print(f"📊 Comprehensive JSON reports saved for analysis")
+    print(f"\n️  Visualizations created for each test run")
+    print(f" Comprehensive JSON reports saved for analysis")
 
 if __name__ == "__main__":
     main()

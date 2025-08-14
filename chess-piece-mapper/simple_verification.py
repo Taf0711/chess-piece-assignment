@@ -18,12 +18,12 @@ def create_dated_run_folder():
 
 def test_data_loading():
     """Test basic data loading without dependencies"""
-    print("🔍 SIMPLE VERIFICATION TEST")
+    print(" SIMPLE VERIFICATION TEST")
     print("=" * 50)
     
     # Create run folder
     run_folder = create_dated_run_folder()
-    print(f"📁 Results folder: {run_folder}")
+    print(f" Results folder: {run_folder}")
     
     # Test basic data access - check train folder specifically
     data_path = "/home/pre/projects/chess-datagen/gen-data/render_src/coco_data_2025_08_08__21_53_08"
@@ -31,10 +31,10 @@ def test_data_loading():
     
     # Check if data path exists
     if not os.path.exists(train_path):
-        print(f"❌ Train data path not found: {train_path}")
+        print(f" Train data path not found: {train_path}")
         return
     
-    print(f"✅ Train data path exists: {train_path}")
+    print(f" Train data path exists: {train_path}")
     
     # List contents
     try:
@@ -45,21 +45,21 @@ def test_data_loading():
         key_files = ['coco_annotations.json', 'board_placements.json']
         for key_file in key_files:
             if key_file in contents:
-                print(f"  ✅ Found: {key_file}")
+                print(f"   Found: {key_file}")
             else:
-                print(f"  ❌ Missing: {key_file}")
+                print(f"   Missing: {key_file}")
         
         # Check images folder
         if 'images' in contents:
             images_path = os.path.join(train_path, 'images')
             if os.path.isdir(images_path):
                 image_count = len([f for f in os.listdir(images_path) if f.endswith('.png')])
-                print(f"  📸 Found {image_count} PNG images in train set")
+                print(f"   Found {image_count} PNG images in train set")
             else:
-                print(f"  ❌ Images is not a directory")
+                print(f"   Images is not a directory")
         
     except Exception as e:
-        print(f"❌ Error accessing data: {str(e)}")
+        print(f" Error accessing data: {str(e)}")
         return
     
     # Test basic JSON loading (corrected paths)
@@ -68,22 +68,22 @@ def test_data_loading():
         if os.path.exists(annotations_file):
             with open(annotations_file, 'r') as f:
                 annotations = json.load(f)
-            print(f"✅ Loaded coco_annotations.json")
-            print(f"  📊 Images: {len(annotations.get('images', []))}")
+            print(f" Loaded coco_annotations.json")
+            print(f"   Images: {len(annotations.get('images', []))}")
             print(f"  📦 Annotations: {len(annotations.get('annotations', []))}")
-            print(f"  🏷️  Categories: {len(annotations.get('categories', []))}")
+            print(f"  🏷  Categories: {len(annotations.get('categories', []))}")
             
             # Show categories
             categories = annotations.get('categories', [])
             if categories:
-                print(f"  🎯 Piece types found:")
+                print(f"   Piece types found:")
                 for cat in categories[:10]:  # Show first 10
                     print(f"    - {cat['name']} (id: {cat['id']})")
                 if len(categories) > 10:
                     print(f"    ... and {len(categories) - 10} more")
         
     except Exception as e:
-        print(f"❌ Error loading annotations: {str(e)}")
+        print(f" Error loading annotations: {str(e)}")
         return
     
     # Test board placements
@@ -92,20 +92,20 @@ def test_data_loading():
         if os.path.exists(placements_file):
             with open(placements_file, 'r') as f:
                 placements = json.load(f)
-            print(f"✅ Loaded board_placements.json")
-            print(f"  🏁 Board positions: {len(placements)}")
+            print(f" Loaded board_placements.json")
+            print(f"   Board positions: {len(placements)}")
             
             # Show sample
             if placements:
                 sample_key = list(placements.keys())[0]
                 sample_data = placements[sample_key]
-                print(f"  📝 Sample (image {sample_key}):")
+                print(f"   Sample (image {sample_key}):")
                 print(f"    FEN: {sample_data.get('fen', 'N/A')[:30]}...")
                 if 'pieces' in sample_data:
                     print(f"    Pieces: {len(sample_data['pieces'])}")
         
     except Exception as e:
-        print(f"❌ Error loading placements: {str(e)}")
+        print(f" Error loading placements: {str(e)}")
         return
     
     # Create basic report
@@ -123,12 +123,12 @@ def test_data_loading():
     with open(report_path, 'w') as f:
         json.dump(report, f, indent=2)
     
-    print(f"\n📝 Simple verification report saved: {report_path}")
-    print(f"\n✅ VERIFICATION STATUS:")
-    print(f"  🔧 Data loading: ✅ Working")
-    print(f"  📂 File structure: ✅ Valid")
-    print(f"  📊 JSON parsing: ✅ Functional")
-    print(f"  🏁 Next step: Install dependencies for accuracy testing")
+    print(f"\n Simple verification report saved: {report_path}")
+    print(f"\n VERIFICATION STATUS:")
+    print(f"   Data loading:  Working")
+    print(f"  📂 File structure:  Valid")
+    print(f"   JSON parsing:  Functional")
+    print(f"   Next step: Install dependencies for accuracy testing")
     
     return True
 
@@ -137,7 +137,7 @@ def main():
     success = test_data_loading()
     
     if success:
-        print(f"\n🎯 NEXT STEPS:")
+        print(f"\n NEXT STEPS:")
         print(f"  1. Install required Python packages")
         print(f"  2. Run full accuracy verification test")
         print(f"  3. Generate PNG visualizations")
