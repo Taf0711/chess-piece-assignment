@@ -1,0 +1,242 @@
+{
+  "timestamp": "2025-08-09T22:49:52.021870",
+  "test_name": "param_test_balanced_approach",
+  "method": "Improved coordinate mapping with Hungarian algorithm approximation",
+  "average_accuracy": 0.2109375,
+  "successful_tests": 20,
+  "total_tests": 20,
+  "best_accuracy": 0.40625,
+  "worst_accuracy": 0.0625,
+  "progress_to_target": 42.1875,
+  "target_accuracy": 0.5,
+  "detailed_results": [
+    {
+      "image_id": 0,
+      "image_filename": "images/000000.png",
+      "accuracy": 0.125,
+      "correct": 4,
+      "total": 32,
+      "assignments_made": 13,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 1,
+      "image_filename": "images/000001.png",
+      "accuracy": 0.0625,
+      "correct": 2,
+      "total": 32,
+      "assignments_made": 14,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 2,
+      "image_filename": "images/000002.png",
+      "accuracy": 0.375,
+      "correct": 12,
+      "total": 32,
+      "assignments_made": 17,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 3,
+      "image_filename": "images/000003.png",
+      "accuracy": 0.28125,
+      "correct": 9,
+      "total": 32,
+      "assignments_made": 12,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 4,
+      "image_filename": "images/000004.png",
+      "accuracy": 0.15625,
+      "correct": 5,
+      "total": 32,
+      "assignments_made": 15,
+      "pieces_detected": 31,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 5,
+      "image_filename": "images/000005.png",
+      "accuracy": 0.125,
+      "correct": 4,
+      "total": 32,
+      "assignments_made": 13,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 6,
+      "image_filename": "images/000006.png",
+      "accuracy": 0.0625,
+      "correct": 2,
+      "total": 32,
+      "assignments_made": 14,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 7,
+      "image_filename": "images/000007.png",
+      "accuracy": 0.40625,
+      "correct": 13,
+      "total": 32,
+      "assignments_made": 18,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 8,
+      "image_filename": "images/000008.png",
+      "accuracy": 0.28125,
+      "correct": 9,
+      "total": 32,
+      "assignments_made": 12,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 9,
+      "image_filename": "images/000009.png",
+      "accuracy": 0.15625,
+      "correct": 5,
+      "total": 32,
+      "assignments_made": 15,
+      "pieces_detected": 31,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 10,
+      "image_filename": "images/000010.png",
+      "accuracy": 0.15625,
+      "correct": 5,
+      "total": 32,
+      "assignments_made": 13,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 11,
+      "image_filename": "images/000011.png",
+      "accuracy": 0.09375,
+      "correct": 3,
+      "total": 32,
+      "assignments_made": 14,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 12,
+      "image_filename": "images/000012.png",
+      "accuracy": 0.40625,
+      "correct": 13,
+      "total": 32,
+      "assignments_made": 17,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 13,
+      "image_filename": "images/000013.png",
+      "accuracy": 0.28125,
+      "correct": 9,
+      "total": 32,
+      "assignments_made": 12,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 14,
+      "image_filename": "images/000014.png",
+      "accuracy": 0.15625,
+      "correct": 5,
+      "total": 32,
+      "assignments_made": 15,
+      "pieces_detected": 31,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 15,
+      "image_filename": "images/000015.png",
+      "accuracy": 0.15625,
+      "correct": 5,
+      "total": 32,
+      "assignments_made": 13,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 16,
+      "image_filename": "images/000016.png",
+      "accuracy": 0.09375,
+      "correct": 3,
+      "total": 32,
+      "assignments_made": 14,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 17,
+      "image_filename": "images/000017.png",
+      "accuracy": 0.40625,
+      "correct": 13,
+      "total": 32,
+      "assignments_made": 17,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 18,
+      "image_filename": "images/000018.png",
+      "accuracy": 0.28125,
+      "correct": 9,
+      "total": 32,
+      "assignments_made": 12,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    },
+    {
+      "image_id": 19,
+      "image_filename": "images/000019.png",
+      "accuracy": 0.15625,
+      "correct": 5,
+      "total": 32,
+      "assignments_made": 15,
+      "pieces_detected": 31,
+      "ground_truth_pieces": 32,
+      "method": "Improved Hungarian Assignment"
+    }
+  ],
+  "improvements_implemented": [
+    "Better cost function with piece type matching bonuses",
+    "Chess logic penalties for unrealistic positions",
+    "Hungarian algorithm approximation for optimal assignment",
+    "Extended test set (20 images vs 10)",
+    "Comprehensive text visualizations for each image",
+    "Organized folder structure with test run names"
+  ]
+}

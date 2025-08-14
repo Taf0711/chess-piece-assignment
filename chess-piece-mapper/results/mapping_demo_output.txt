@@ -1,0 +1,91 @@
+🎯 CHESS PIECE TO SQUARE MAPPING DEMONSTRATION
+============================================================
+
+📊 INPUT: 11 Detected Chess Pieces
+------------------------------------------------------------
+Piece Type      Position (x,y)  Bbox                 Conf  
+------------------------------------------------------------
+WhiteRook1      (16,16)       [0,0,32,32]          0.95
+WhiteKnight1    (48,16)       [32,0,32,32]         0.89
+WhiteBishop1    (80,16)       [64,0,32,32]         0.92
+WhiteQueen1     (112,16)       [96,0,32,32]         0.97
+WhiteKing1      (144,16)       [128,0,32,32]        0.99
+WhitePawn1      (16,48)       [0,32,32,32]         0.88
+WhitePawn2      (48,48)       [32,32,32,32]        0.90
+WhitePawn3      (144,112)       [128,96,32,32]       0.85
+BlackPawn1      (16,208)       [0,192,32,32]        0.87
+BlackKnight1    (48,240)       [32,224,32,32]       0.91
+BlackRook1      (240,240)       [224,224,32,32]      0.94
+
+⚡ PROCESSING: Hungarian Algorithm Optimization
+------------------------------------------------------------
+✅ Created 11×64 cost matrix
+✅ Found 11 optimal assignments
+
+🎯 OUTPUT: Piece-to-Square Assignments
+------------------------------------------------------------
+Piece        From (x,y)   →   Square   Cost     Quality   
+------------------------------------------------------------
+WRook        (16,16)      →   a1       -0.050   Excellent 
+WKnight      (48,16)      →   b1       -0.050   Excellent 
+WBishop      (80,16)      →   c1       -0.050   Excellent 
+WQueen       (112,16)     →   d1       -0.050   Excellent 
+WKing        (144,16)     →   e1       -0.050   Excellent 
+WPawn        (16,48)      →   a2       -0.100   Excellent 
+WPawn        (48,48)      →   b2       -0.100   Excellent 
+WPawn        (144,112)    →   e4       0.000    Excellent 
+BPawn        (16,208)     →   a7       -0.100   Excellent 
+BKnight      (48,240)     →   b8       -0.050   Excellent 
+BRook        (240,240)    →   h8       -0.050   Excellent 
+
+🏁 RESULT: Final Board Position
+------------------------------------------------------------
+    a b c d e f g h
+  ┌─────────────────┐
+8 │ . n . . . . . r │
+7 │ p . . . . . . . │
+6 │ . . . . . . . . │
+5 │ . . . . . . . . │
+4 │ . . . . P . . . │
+3 │ . . . . . . . . │
+2 │ P P . . . . . . │
+1 │ R N B Q K . . . │
+  └─────────────────┘
+    a b c d e f g h
+
+📈 STATISTICS
+------------------------------------------------------------
+  Total Pieces Mapped: 11
+  Average Assignment Cost: -0.059
+  Excellent Assignments: 11
+  Good Assignments: 0
+  Success Rate: 11/11 = 100.0%
+
+🔍 COST FUNCTION BREAKDOWN
+============================================================
+Analyzing costs for WhiteRook1 at position (20, 20)
+Testing assignment to nearby squares:
+
+Square   Distance   Overlap    PieceType    BoardEdge    Total     
+------------------------------------------------------------
+a1       0.177      0.380      -0.100       0.000        0.886     
+b1       0.884      0.942      0.000        0.000        2.768     
+a2       0.884      0.942      -0.100       0.000        2.718     
+b2       1.237      0.992      0.000        0.000        3.222     
+
+💡 Cost Components:
+  • Distance: How far piece center is from square center
+  • Overlap: IoU between piece bounding box and square
+  • PieceType: Bonus/penalty based on chess logic (e.g., rooks on back rank)
+  • BoardEdge: Penalty for pieces near image boundaries
+  • Lower total cost = better assignment
+
+🎉 DEMONSTRATION COMPLETE!
+============================================================
+This ML approach successfully:
+  ✅ Detects chess pieces from bounding boxes
+  ✅ Warps board to standardized 256×256 view
+  ✅ Uses multi-criteria cost function for assignment quality
+  ✅ Applies Hungarian algorithm for optimal mapping
+  ✅ Provides clear visualization of results
+  ✅ Evaluates assignment quality and accuracy

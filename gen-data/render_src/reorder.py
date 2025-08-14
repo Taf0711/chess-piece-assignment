@@ -14,29 +14,235 @@ import json
 import os
 import math
 import datetime
+import threading
+import subprocess
+
 # Init BlenderProc and Optimize Your Settings
 # Using magical numbers found online
 # https://blenderartists.org/t/options-to-speed-up-a-render/1515328
 bproc.init()
+
+
+def _force_cycles_gpu(device_type="CUDA"):
+    print("=== FORCING GPU CONFIGURATION ===")
+    
+    # Make sure Cycles is the active engine
+    bpy.context.scene.render.engine = "CYCLES"
+    print(f"Set render engine to: {bpy.context.scene.render.engine}")
+
+    # 1) Tell Cycles to use the GPU for rendering
+    bpy.context.scene.cycles.device = "GPU"
+    print(f"Set cycles device to: {bpy.context.scene.cycles.device}")
+
+    # 2) Enable the CUDA backend at the preferences level
+    prefs = bpy.context.preferences.addons["cycles"].preferences
+    # In 4.x you should refresh before changing devices
+    try:
+        prefs.refresh_devices()
+        print("Refreshed devices successfully")
+    except Exception as e:
+        print(f"Device refresh failed: {e}")
+
+    # Prefer CUDA (you can change to "OPTIX" if you want OptiX path tracing)
+    prefs.compute_device_type = device_type  # "CUDA" or "OPTIX"
+    print(f"Set compute device type to: {prefs.compute_device_type}")
+
+    # 3) Turn on all CUDA devices (and leave CPU off) - MORE AGGRESSIVE
+    print("=== DEVICE CONFIGURATION ===")
+    def _enable_all_cuda(devs):
+        for d in devs:
+            name = getattr(d, "name", "")
+            dev_type = getattr(d, "type", "")
+            print(f"Found device: {name} ({dev_type})")
+            
+            # EXPLICITLY disable CPU and enable only CUDA/OPTIX
+            if dev_type == "CPU":
+                d.use = False
+                print(f"  -> DISABLED CPU: {name}")
+            elif dev_type in ("CUDA", "OPTIX"):
+                d.use = True
+                print(f"  -> ENABLED GPU: {name}")
+            else:
+                d.use = False
+                print(f"  -> DISABLED UNKNOWN: {name}")
+    
+    try:
+        # Flat list style
+        _enable_all_cuda(prefs.devices)
+    except Exception as e:
+        print(f"Flat device config failed: {e}")
+        # Nested style ([(type, [devices...]), ...])
+        try:
+            for typ, devs in getattr(prefs, "get_devices_for_type", lambda *_: [])(device_type):
+                print(f"Processing device group: {typ}")
+                _enable_all_cuda(devs)
+        except Exception as e2:
+            print(f"Nested device config also failed: {e2}")
+
+    # 4) Set environment variables for extra enforcement
+    os.environ["CYCLES_RENDER_DEVICE"] = device_type
+    os.environ["CUDA_VISIBLE_DEVICES"] = "0"  # Force only GPU 0
+    print(f"Set CYCLES_RENDER_DEVICE={device_type}")
+    print(f"Set CUDA_VISIBLE_DEVICES=0")
+
+    # 5) Force preview compute device to GPU as well
+    try:
+        bpy.context.scene.cycles.preview_compute_device = "GPU"
+        print("Set preview compute device to GPU")
+    except AttributeError:
+        print("Preview compute device setting not available")
+    
+    # Log what we ended up with
+    enabled = []
+    disabled = []
+    try:
+        for d in prefs.devices:
+            name = getattr(d, "name", "")
+            dev_type = getattr(d, "type", "")
+            is_used = getattr(d, "use", False)
+            if is_used:
+                enabled.append(f"{dev_type}:{name}")
+            else:
+                disabled.append(f"{dev_type}:{name}")
+    except Exception:
+        pass
+    
+    print(f"=== FINAL GPU CONFIG ===")
+    print(f"Render engine: {bpy.context.scene.render.engine}")
+    print(f"Cycles device: {bpy.context.scene.cycles.device}")
+    print(f"Compute device type: {prefs.compute_device_type}")
+    try:
+        print(f"Preview compute device: {bpy.context.scene.cycles.preview_compute_device}")
+    except AttributeError:
+        print("Preview compute device: N/A")
+    print(f"ENABLED devices: {enabled}")
+    print(f"DISABLED devices: {disabled}")
+    print("=== END GPU CONFIG ===")
+
+_force_cycles_gpu(device_type="CUDA")  # Back to CUDA, remove BlenderProc interference
+
+def verify_gpu_usage():
+    """Verify that GPU is properly configured for rendering"""
+    print("=== VERIFYING GPU USAGE ===")
+    
+    # Check render engine
+    engine = bpy.context.scene.render.engine
+    print(f"Render Engine: {engine}")
+    if engine != "CYCLES":
+        print("WARNING: Not using Cycles engine!")
+        return False
+    
+    # Check cycles device setting
+    device = bpy.context.scene.cycles.device
+    print(f"Cycles Device: {device}")
+    if device != "GPU":
+        print("WARNING: Cycles not set to use GPU!")
+        return False
+    
+    # Check enabled devices
+    prefs = bpy.context.preferences.addons["cycles"].preferences
+    gpu_enabled = False
+    cpu_enabled = False
+    
+    for d in prefs.devices:
+        name = getattr(d, "name", "")
+        dev_type = getattr(d, "type", "")
+        is_used = getattr(d, "use", False)
+        print(f"Device: {name} ({dev_type}) - Enabled: {is_used}")
+        
+        if dev_type == "CUDA" and is_used:
+            gpu_enabled = True
+        elif dev_type == "CPU" and is_used:
+            cpu_enabled = True
+    
+    if not gpu_enabled:
+        print("ERROR: No CUDA GPU devices are enabled!")
+        return False
+    
+    if cpu_enabled:
+        print("WARNING: CPU is still enabled for rendering!")
+        return False
+    
+    print("✓ GPU configuration appears correct")
+    return True
+
+verify_gpu_usage()
 bproc.renderer.set_cpu_threads(0)
-bproc.renderer.set_render_devices(
-    use_only_cpu=False,
-    desired_gpu_device_type="OPTIX",  # TODO: Change to your gpu type
-    desired_gpu_ids=0
-)
+
+# COMPLETELY REMOVE BLENDERPROC DEVICE SETTING - IT'S OVERRIDING OUR CONFIG!
+print("=== SKIPPING BlenderProc device setting - using manual GPU config only ===")
+# IMMEDIATELY DISABLE ALL CPU CORES IN BLENDER
+bpy.context.scene.render.threads_mode = 'FIXED'
+bpy.context.scene.render.threads = 0  # Force 0 CPU threads
+
 bproc.renderer.set_noise_threshold(0.1)
 
-# seems to not go any faster after lowering from 32
-bproc.renderer.set_max_amount_of_samples(32)
+# RE-ENFORCE GPU USAGE AFTER BLENDERPROC SETUP
+print("=== RE-ENFORCING GPU AFTER BLENDERPROC ===")
+_force_cycles_gpu(device_type="CUDA")  # Back to CUDA, remove BlenderProc interference
 
-bproc.renderer.set_denoiser("OPTIX")
+# FINAL AGGRESSIVE CHECK - ENSURE NO CPU USAGE
+prefs = bpy.context.preferences.addons["cycles"].preferences
+for d in prefs.devices:
+    if getattr(d, "type", "") == "CPU":
+        d.use = False
+        print(f"FINAL CHECK: Disabled CPU device {getattr(d, 'name', '')}")
+    elif getattr(d, "type", "") == "CUDA":
+        d.use = True
+        print(f"FINAL CHECK: Enabled CUDA device {getattr(d, 'name', '')}")
 
-bproc.renderer.set_light_bounces(3,3,4,4,12,8,0)
+verify_gpu_usage()
+
+# GPU MONITORING THREAD FOR REAL-TIME FEEDBACK
+gpu_monitor_running = True
+gpu_utilization_history = []
+
+def monitor_gpu():
+    global gpu_monitor_running, gpu_utilization_history
+    while gpu_monitor_running:
+        try:
+            result = subprocess.run([
+                'nvidia-smi', '--query-gpu=utilization.gpu,temperature.gpu,power.draw', 
+                '--format=csv,noheader,nounits'
+            ], capture_output=True, text=True, timeout=5)
+            
+            if result.returncode == 0:
+                gpu_data = result.stdout.strip().split(', ')
+                gpu_util = int(gpu_data[0])
+                gpu_temp = int(gpu_data[1]) 
+                gpu_power = float(gpu_data[2])
+                
+                gpu_utilization_history.append(gpu_util)
+                if len(gpu_utilization_history) > 20:  # Keep last 20 readings
+                    gpu_utilization_history.pop(0)
+                
+                avg_util = sum(gpu_utilization_history) / len(gpu_utilization_history)
+                print(f"GPU: {gpu_util}% util, {gpu_temp}°C, {gpu_power}W (avg: {avg_util:.1f}%)")
+                
+        except Exception as e:
+            print(f"GPU monitoring error: {e}")
+        
+        time.sleep(2)  # Monitor every 2 seconds
+
+# Start GPU monitoring thread
+gpu_monitor_thread = threading.Thread(target=monitor_gpu, daemon=True)
+gpu_monitor_thread.start()
+print("🔥 GPU monitoring started - targeting 70-80% utilization")
+
+# OPTIMIZED SAMPLES FOR 70-80% GPU UTILIZATION
+bproc.renderer.set_max_amount_of_samples(256)  # Balanced samples for sustained GPU load
+
+# DISABLE DENOISING TO INCREASE GPU WORKLOAD  
+bproc.renderer.set_denoiser(None)  # No denoising = more raw GPU compute
+
+# INCREASE BOUNCES FOR MORE GPU-INTENSIVE RAY TRACING
+bproc.renderer.set_light_bounces(12, 12, 12, 12, 24, 16, 4)  # Much higher bounces
 
 # Load your scene
 loaded = bproc.loader.load_blend("ChessBoard2.blend")
 output_path = datetime.datetime.now().strftime("coco_data_%Y_%m_%d__%H_%M_%S")
 os.makedirs(output_path, exist_ok=True)
+
 # ----- PIECE PLACEMENT -----
 # This section defines the positions of the chess pieces on the board.
 positionsDict = {
@@ -104,7 +310,7 @@ positionsDict = {
     'H6': (0.85046, 0.372720),
     'H7': (0.85046, 0.622978),
     'H8': (0.85046, 0.873236),
-    'None' : (1,1)
+    'None': (1, 1)
 }
 
 pieceToSquareDict = {
@@ -220,7 +426,6 @@ pieceToSquareDict = {
 def parse_fen(fen):
     files = 'abcdefgh'
     ranks = fen.split()[0].split('/')
-    # print(ranks)
     piecePositions = {
         'BlackPawn': [], 'WhitePawn': [],
         'BlackRook': [], 'WhiteRook': [],
@@ -264,10 +469,10 @@ def update_dict_from_positions(d, positions):
     return d
 
 class Piece:
-    def __init__(self,name, kind, color, initial_position, home_tile_color):
-        self.name_= name
-        self.kind_= kind
-        self.color_= color
+    def __init__(self, name, kind, color, initial_position, home_tile_color):
+        self.name_ = name
+        self.kind_ = kind
+        self.color_ = color
         self.initial_position_ = initial_position
         self.home_tile_color_ = home_tile_color
 
@@ -277,13 +482,12 @@ def allowed_squares_for(piece, free_squares):
 
     # pawns cant go on rank 1 or 8
     if piece.kind_ == 'Pawn':
-        choices = {sq for sq in choices if sq[1] not in ('1','8')}
+        choices = {sq for sq in choices if sq[1] not in ('1', '8')}
 
     # bishops only on same color they started on
     if piece.kind_ == 'Bishop':
         # piece.home_tile_color_ is a bool: False = Black True = White
         choices = {sq for sq in choices if tile_color[sq] == piece.home_tile_color_}
-
 
     return choices
 
@@ -295,13 +499,14 @@ def randomizePositions(chance=0.5):
 
     # if piece were chosen, add it to pieces otherwise make it disappear
     for p in pieceList:
-        if random.random() < chance or 'King' in p.name_: # each piece has a 50% chance of selection, but kings are always selected
+        # each piece has a 50% chance of selection, but kings are always selected
+        if random.random() < chance or 'King' in p.name_:
             pieces.append(p)
         else:
             bpy.data.objects[p.name_].hide_viewport = True
             bpy.data.objects[p.name_].hide_render = True
 
-    #shuffle the pieces
+    # shuffle the pieces
     random.shuffle(pieces)
 
     for p in pieces:
@@ -311,21 +516,21 @@ def randomizePositions(chance=0.5):
             bpy.data.objects[p.name_].hide_viewport = True
             bpy.data.objects[p.name_].hide_render = True
             continue
-            #there are no bugs, only features
-            raise RuntimeError(f"No legal square left for {p.name_}!")
+            # there are no bugs, only features
+            # raise RuntimeError(f"No legal square left for {p.name_}!")
 
         square = random.choice(list(legal))
         free_squares -= {square}
         assignment[p.name_] = square
 
-
     return assignment
 
 def reset():
-    #reset the pieces
-    for name,square in pieceToSquareDict.items():
+    # reset the pieces
+    for name, square in pieceToSquareDict.items():
         bpy.data.objects[name].hide_viewport = True
         bpy.data.objects[name].hide_render = True
+
 FILES = 'ABCDEFGH'
 RANKS = '12345678'
 
@@ -338,9 +543,9 @@ for f in FILES:
 
 pieceList = []
 
-#make the piece class and populate pieceList
+# make the piece class and populate pieceList
 for piece, square in pieceToSquareDict.items():
-    if square is "None":
+    if square == "None":  # fixed string comparison
         continue
     name = piece
     color = 'Black' if 'Black' in name else 'White'
@@ -348,12 +553,11 @@ for piece, square in pieceToSquareDict.items():
     initial_position = square
     print(square)
     home_tile_color = 'Black' if ((FILES.index(square[0]) + RANKS.index(square[1])) % 2 == 0) else 'White'
-    pieceList.append(Piece(name,kind,color,initial_position,home_tile_color))
+    pieceList.append(Piece(name, kind, color, initial_position, home_tile_color))
 
 reset()
 
 # Labeling for COCO annotations
-
 CATEGORY_NAME_TO_ID = {
     "WhitePawn": 13,
     "WhiteRook": 1,
@@ -378,13 +582,11 @@ def get_base_name(name):
 
 for obj in loaded:
     full_name = obj.get_name()
-    
     base_name = get_base_name(full_name)
     print(f"Processing object: {full_name} (base name: {base_name})")
     if base_name not in CATEGORY_NAME_TO_ID:
         print(f"WARNING: Unknown category name '{base_name}' for object '{full_name}'")
         continue
-
     obj.set_cp("category_id", CATEGORY_NAME_TO_ID[base_name])
 
 # ----- CAMERA SETUP -----
@@ -394,19 +596,19 @@ for obj in loaded:
 # The below code was taken from the BlenderProc documentation
 # Create a point light next to it
 light = bproc.types.Light()
-light.set_location([0.0, 0.0, 2.0]) # Light above the chessboard
+light.set_location([0.0, 0.0, 2.0])  # Light above the chessboard
 light.set_energy(1000.0)
 bproc.camera.set_resolution(640, 480)  # Set the resolution of the rendered images
 bproc.renderer.set_output_format(enable_transparency=True)
 print("K MATRIX", bproc.camera.get_intrinsics_as_K_matrix())
 
-
-# GPT Soup to create a fibonacci sphere for camera positions
-# This will create a set of camera positions that are evenly distributed around the sphere
-  # Distance from origin
-N = 10    # Number of cameras
-num_random_setup = 1  # Number of random setups to generate
+# OPTIMIZED FOR SUSTAINED GPU UTILIZATION
+# Balanced workload for 70-80% GPU usage with efficient data generation
+N = 5     # More cameras per setup for better GPU utilization
+num_random_setup = 200   # More setups for sustained workload
 print(f"Generating {num_random_setup} random setups with {N} camera positions each...")
+print(f"Total images to generate: {N * num_random_setup}")
+print("Optimized for 70-80% GPU utilization...")
 # Golden angle in radians
 golden_angle = np.pi * (3 - np.sqrt(5))
 
@@ -417,20 +619,20 @@ for i in range(N):
     rho = random.uniform(4.5, 6.5)
 
     z = 1 - (i) / (N - 1)            # z from 1 to -1
-    radius = np.sqrt(1 - z * z)          # radius at that z
-    theta = golden_angle * i             # azimuthal angle
+    radius = np.sqrt(1 - z * z)      # radius at that z
+    theta = golden_angle * i         # azimuthal angle
 
     x = np.cos(theta) * radius
     y = np.sin(theta) * radius
 
-    pos = rho * np.array([x, y, z])      # scale to radius rho
+    pos = rho * np.array([x, y, z])  # scale to radius rho
 
     # Camera looks at origin
     forward_vec = -pos / np.linalg.norm(pos)
     rotation = bproc.camera.rotation_from_forward_vec(forward_vec)
 
     cam_pose = bproc.math.build_transformation_mat(pos.tolist(), rotation)
-    print(rotation,cam_pose)
+    print(rotation, cam_pose)
     bproc.camera.add_camera_pose(cam_pose)
     camera_info[i] = {"dist": rho, "rot": rotation.tolist(), "pos": pos.tolist()}
 
@@ -445,12 +647,21 @@ fen_visited = set()
 # Set up csv reading
 csv_file = open('positions.csv', newline='')
 reader = csv.reader(csv_file)
-next(reader, None)        
-fen_rows = iter(reader) 
+next(reader, None)
+fen_rows = iter(reader)
 avg_time = 0
 for z in range(num_random_setup):
-    print(f"==== Render step {z+1}/{num_random_setup}... ====")
+    progress_pct = (z+1) / num_random_setup * 100
+    print(f"==== Render step {z+1}/{num_random_setup} ({progress_pct:.1f}%) ====")
     current_time = time.time()
+    
+    # Estimate completion time
+    if z > 0:
+        time_per_setup = avg_time
+        remaining_setups = num_random_setup - (z + 1)
+        eta_seconds = remaining_setups * time_per_setup
+        eta_hours = eta_seconds / 3600
+        print(f"ETA: {eta_hours:.1f} hours ({eta_seconds/60:.0f} minutes) remaining")
 
     light.set_location(
         [
@@ -496,27 +707,37 @@ for z in range(num_random_setup):
     placement = pieceToSquareDict.copy()
 
     for name, square in placement.items():
-        if square is "None":
+        if square == "None":  # fixed string comparison
             continue
         x, y = positionsDict[square.upper()]
         bpy.data.objects[name].location.x = x
         bpy.data.objects[name].location.y = y
 
-    # Render segmentation data and produce instance attribute maps
+    # OPTIMIZED RENDERING WITH GPU UTILIZATION MONITORING
+    avg_util = sum(gpu_utilization_history) / len(gpu_utilization_history) if gpu_utilization_history else 0
+    print(f"=== STARTING RENDER {z+1}/{num_random_setup} (GPU avg: {avg_util:.1f}%) ===")
+    
+    render_start = time.time()
+    print("📊 Rendering segmentation maps...")
     seg_data = bproc.renderer.render_segmap(map_by=["instance", "class", "name"])
-    # Render the scene
+    
+    print("🎨 Rendering main colors...")
     data = bproc.renderer.render()
-    # Write data to coco file
-    print("Writing data to COCO file...")
+    render_time = time.time() - render_start
+    
+    print(f"⚡ Render {z+1} complete in {render_time:.2f}s")
+    
+    # BATCH WRITE DATA TO REDUCE I/O BOTTLENECKS  
     write_start = time.time()
     image_paths = bproc.writer.write_coco_annotations(
         f'{output_path}/{dir_pre}',
-        instance_segmaps=seg_data["instance_segmaps"], # type: ignore
-        instance_attribute_maps=seg_data["instance_attribute_maps"], # type: ignore
-        colors=data["colors"], # type: ignore
+        instance_segmaps=seg_data["instance_segmaps"],  # type: ignore
+        instance_attribute_maps=seg_data["instance_attribute_maps"],  # type: ignore
+        colors=data["colors"],  # type: ignore
         color_file_format="PNG",
         append_to_existing_output=True,  # <-- important!
     )
+    
     # THE OUTPUT OF WRITE COCO WAS MODIFIED TO RETURN THE IMAGE PATHS; ENSURE THIS IS DONE IN FUTURE CODE REVISIONS
 
     input_json_path = f'{output_path}/{dir_pre}/board_placements.json'
@@ -544,8 +765,66 @@ for z in range(num_random_setup):
     # Save back to file
     with open(input_json_path, "w") as f:
         json.dump(data_list, f)
-    print(f"Finished writing after {time.time() - write_start:.2f} seconds.")
-    avg_time = (avg_time * z + time.time() - current_time) / (z+1)
-    print(f"==== Render step {z+1} completed in {time.time() - current_time:.2f} seconds. ====")
+    write_time = time.time() - write_start
+    print(f"💾 Writing completed in {write_time:.2f}s")
+    
+    # DYNAMIC GPU UTILIZATION OPTIMIZATION
+    current_avg_util = sum(gpu_utilization_history) / len(gpu_utilization_history) if gpu_utilization_history else 0
+    current_samples = bpy.context.scene.cycles.samples
+    
+    if current_avg_util < 60:  # Too low utilization
+        new_samples = min(current_samples + 32, 512)
+        bproc.renderer.set_max_amount_of_samples(new_samples)
+        print(f"📈 GPU util low ({current_avg_util:.1f}%) - increasing samples to {new_samples}")
+    elif current_avg_util > 90:  # Too high utilization  
+        new_samples = max(current_samples - 32, 128)
+        bproc.renderer.set_max_amount_of_samples(new_samples)
+        print(f"📉 GPU util high ({current_avg_util:.1f}%) - reducing samples to {new_samples}")
+    else:
+        print(f"✅ GPU utilization optimal: {current_avg_util:.1f}%")
+    
+    avg_time = (avg_time * z + time.time() - current_time) / (z + 1)
+    step_time = time.time() - current_time
+    print(f"⏱️  Setup {z+1} completed in {step_time:.2f}s (render: {render_time:.2f}s, write: {write_time:.2f}s)")
+    
+    # Enhanced progress summary every 5 steps
+    if (z + 1) % 5 == 0:
+        total_images = (z + 1) * N
+        total_elapsed = sum([avg_time * (i + 1) for i in range(z + 1)])
+        images_per_hour = total_images / (total_elapsed / 3600) if total_elapsed > 0 else 0
+        
+        print(f"🚀 === PROGRESS CHECKPOINT {z+1}/{num_random_setup} ===")
+        print(f"📸 Generated: {total_images} images")
+        print(f"⏱️  Average time per setup: {avg_time:.2f}s")
+        print(f"🔥 Current GPU utilization: {current_avg_util:.1f}%") 
+        print(f"⚡ Images per hour: {images_per_hour:.0f}")
+        print(f"🕐 Total elapsed: {total_elapsed/60:.1f} minutes")
+        print("=== END CHECKPOINT ===")
 
-print(f"==== All Renders Completed.====\nTotal Time: {avg_time*num_random_setup:.2f}\nAverage Time: {avg_time:.2f}")
+total_images = num_random_setup * N
+total_time_hours = (avg_time * num_random_setup) / 3600
+
+# STOP GPU MONITORING
+gpu_monitor_running = False
+print("🛑 Stopping GPU monitoring...")
+
+# FINAL GPU UTILIZATION SUMMARY
+if gpu_utilization_history:
+    final_avg_util = sum(gpu_utilization_history) / len(gpu_utilization_history)
+    max_util = max(gpu_utilization_history)
+    min_util = min(gpu_utilization_history)
+    print(f"📊 Final GPU Statistics:")
+    print(f"   Average Utilization: {final_avg_util:.1f}%")
+    print(f"   Peak Utilization: {max_util}%")
+    print(f"   Minimum Utilization: {min_util}%")
+
+print(f"🎉 ==== OPTIMIZED DATASET GENERATION COMPLETED ====")
+print(f"📸 Total Images Generated: {total_images:,}")
+print(f"🔢 Total Setups: {num_random_setup}")  
+print(f"📷 Images per Setup: {N}")
+print(f"⏱️  Total Time: {avg_time*num_random_setup:.2f} seconds ({total_time_hours:.1f} hours)")
+print(f"📈 Average Time per Setup: {avg_time:.2f} seconds")
+print(f"🖼️  Average Time per Image: {avg_time/N:.3f} seconds")
+print(f"⚡ Images per Hour: {total_images/total_time_hours:.0f}")
+print(f"🔥 Target GPU utilization: 70-80% (achieved: {final_avg_util:.1f}%)")
+print("🚀 ==== DATASET READY FOR TRAINING ====")

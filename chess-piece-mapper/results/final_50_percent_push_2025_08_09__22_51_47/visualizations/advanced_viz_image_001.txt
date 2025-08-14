@@ -1,0 +1,33 @@
+ADVANCED CHESS PIECE MAPPING - IMAGE 1
+======================================================================
+🎯 Accuracy: 1/32 = 3.1%
+📊 Assignments: 9 | Pieces: 32
+
+ASSIGNMENT PASS BREAKDOWN:
+  Pass 1: 1 assignments
+  Pass 3: 8 assignments
+
+CHESS BOARD LAYOUT:
+  a b c d e f g h
+8 · · · · · · · ·  8
+7 · · · · · · · ·  7
+6                  6
+5                  5
+4         ·        4
+3                  3
+2 · · ✗ ✗   ✗ ✗ ✓  2
+1 · · · ✗ ✗ ✗ ✗ ·  1
+  a b c d e f g h
+
+Legend: ✓=Correct ✗=Wrong ·=Missing ?=Extra
+
+TOP ASSIGNMENTS (by cost):
+  ✓ h2: WhitePawn2 (expected: WhitePawn1) [cost: 0.53, pass: 1]
+  ✗ d1: BlackKnight1 (expected: WhiteQueen1) [cost: 0.96, pass: 3]
+  ✗ c2: BlackRook1 (expected: WhitePawn1) [cost: 1.03, pass: 3]
+  ✗ d2: BlackPawn3 (expected: WhitePawn1) [cost: 1.46, pass: 3]
+  ✗ f2: BlackPawn3 (expected: WhitePawn1) [cost: 1.53, pass: 3]
+  ✗ e1: BlackBishop1 (expected: WhiteKing1) [cost: 1.54, pass: 3]
+  ✗ f1: BlackKing1 (expected: WhiteBishop1) [cost: 1.74, pass: 3]
+  ✗ g2: BlackPawn3 (expected: WhitePawn1) [cost: 2.25, pass: 3]
+  ✗ g1: BlackPawn3 (expected: WhiteKnight1) [cost: 4.98, pass: 3]

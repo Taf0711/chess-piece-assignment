@@ -1,0 +1,1349 @@
+{
+  "test_summary": "Optimized system test with 5 images",
+  "results": [
+    {
+      "image_id": 0,
+      "pieces": 32,
+      "assignments": 32,
+      "assignment_rate": 1.0,
+      "detailed_results": {
+        "status": "success",
+        "assignments": [
+          {
+            "piece": "WhiteRook",
+            "square": "b2",
+            "position": "(44.2, 67.0)",
+            "cost": 1.229,
+            "confidence": 0.59,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhiteRook",
+            "square": "b7",
+            "position": "(44.2, 190.0)",
+            "cost": 1.196,
+            "confidence": 0.601,
+            "quality": "Good",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhiteQueen",
+            "square": "b5",
+            "position": "(43.1, 137.3)",
+            "cost": 0.807,
+            "confidence": 0.731,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c2",
+            "position": "(69.2, 68.2)",
+            "cost": 1.314,
+            "confidence": 0.562,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c3",
+            "position": "(69.2, 85.6)",
+            "cost": 1.03,
+            "confidence": 0.657,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c4",
+            "position": "(69.2, 102.8)",
+            "cost": 1.062,
+            "confidence": 0.646,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c5",
+            "position": "(69.2, 137.1)",
+            "cost": 1.04,
+            "confidence": 0.653,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "d5",
+            "position": "(69.2, 154.4)",
+            "cost": 1.658,
+            "confidence": 0.447,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c6",
+            "position": "(69.2, 171.8)",
+            "cost": 1.021,
+            "confidence": 0.66,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c7",
+            "position": "(69.2, 189.2)",
+            "cost": 1.279,
+            "confidence": 0.574,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "d4",
+            "position": "(115.8, 119.9)",
+            "cost": 0.956,
+            "confidence": 0.681,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteKnight",
+            "square": "b3",
+            "position": "(43.4, 83.4)",
+            "cost": 0.698,
+            "confidence": 0.767,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteKnight",
+            "square": "b6",
+            "position": "(43.4, 172.4)",
+            "cost": 0.754,
+            "confidence": 0.749,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteKing",
+            "square": "b4",
+            "position": "(42.9, 119.9)",
+            "cost": 0.813,
+            "confidence": 0.729,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteBishop",
+            "square": "a4",
+            "position": "(44.7, 102.8)",
+            "cost": 1.471,
+            "confidence": 0.51,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteBishop",
+            "square": "a5",
+            "position": "(44.7, 154.4)",
+            "cost": 1.477,
+            "confidence": 0.508,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackRook",
+            "square": "g2",
+            "position": "(210.8, 67.0)",
+            "cost": 1.227,
+            "confidence": 0.591,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackRook",
+            "square": "g7",
+            "position": "(210.8, 190.0)",
+            "cost": 1.194,
+            "confidence": 0.602,
+            "quality": "Good",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackQueen",
+            "square": "g5",
+            "position": "(211.9, 137.3)",
+            "cost": 0.78,
+            "confidence": 0.74,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f2",
+            "position": "(185.8, 68.2)",
+            "cost": 1.306,
+            "confidence": 0.565,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f3",
+            "position": "(185.8, 85.6)",
+            "cost": 1.004,
+            "confidence": 0.665,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "e4",
+            "position": "(185.8, 102.8)",
+            "cost": 1.639,
+            "confidence": 0.454,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f4",
+            "position": "(185.8, 119.9)",
+            "cost": 1.025,
+            "confidence": 0.658,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f5",
+            "position": "(185.8, 137.1)",
+            "cost": 1.016,
+            "confidence": 0.661,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "e5",
+            "position": "(186.1, 154.4)",
+            "cost": 1.647,
+            "confidence": 0.451,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f6",
+            "position": "(185.8, 171.8)",
+            "cost": 0.995,
+            "confidence": 0.668,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f7",
+            "position": "(185.8, 189.2)",
+            "cost": 1.269,
+            "confidence": 0.577,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackKnight",
+            "square": "g3",
+            "position": "(211.6, 83.4)",
+            "cost": 0.685,
+            "confidence": 0.772,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackKnight",
+            "square": "g6",
+            "position": "(211.6, 172.4)",
+            "cost": 0.741,
+            "confidence": 0.753,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackKing",
+            "square": "g4",
+            "position": "(212.1, 119.9)",
+            "cost": 0.787,
+            "confidence": 0.738,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackBishop",
+            "square": "h4",
+            "position": "(210.3, 102.8)",
+            "cost": 1.486,
+            "confidence": 0.505,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackBishop",
+            "square": "h5",
+            "position": "(210.3, 154.2)",
+            "cost": 1.491,
+            "confidence": 0.503,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          }
+        ],
+        "statistics": {
+          "total_assigned": 32,
+          "high_confidence": 8,
+          "medium_confidence": 24,
+          "low_confidence": 0,
+          "average_confidence": 0.624,
+          "average_cost": 1.128,
+          "ground_truth_available": 32,
+          "correct_assignments": 0,
+          "accuracy": 0.0
+        },
+        "summary": "Assignment Summary:\n\u2022 32 pieces successfully assigned\n\u2022 Average confidence: 0.624\n\u2022 High confidence assignments: 8\n\u2022 Accuracy: 0.0%\n\nQuality breakdown:\n\u2022 Fair: 13\n\u2022 Good: 19\n"
+      }
+    },
+    {
+      "image_id": 1,
+      "pieces": 0,
+      "assignments": 0,
+      "assignment_rate": 0.0,
+      "detailed_results": {
+        "status": "no_assignments",
+        "message": "No pieces could be assigned to squares",
+        "assignments": [],
+        "statistics": {
+          "total_pieces": 0,
+          "assigned_pieces": 0,
+          "assignment_rate": 0.0
+        }
+      }
+    },
+    {
+      "image_id": 2,
+      "pieces": 32,
+      "assignments": 32,
+      "assignment_rate": 1.0,
+      "detailed_results": {
+        "status": "success",
+        "assignments": [
+          {
+            "piece": "WhiteRook",
+            "square": "f7",
+            "position": "(165.3, 191.7)",
+            "cost": 1.172,
+            "confidence": 0.609,
+            "quality": "Good",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhiteRook",
+            "square": "f2",
+            "position": "(156.0, 51.1)",
+            "cost": 1.138,
+            "confidence": 0.621,
+            "quality": "Good",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhiteQueen",
+            "square": "f4",
+            "position": "(152.0, 110.5)",
+            "cost": 1.147,
+            "confidence": 0.618,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "e7",
+            "position": "(153.6, 190.2)",
+            "cost": 1.216,
+            "confidence": 0.595,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "e6",
+            "position": "(151.7, 169.6)",
+            "cost": 0.915,
+            "confidence": 0.695,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "g5",
+            "position": "(159.7, 151.2)",
+            "cost": 1.733,
+            "confidence": 0.422,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "e4",
+            "position": "(149.1, 115.9)",
+            "cost": 0.928,
+            "confidence": 0.691,
+            "quality": "Good",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "g4",
+            "position": "(147.7, 95.8)",
+            "cost": 1.945,
+            "confidence": 0.352,
+            "quality": "Poor",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "e3",
+            "position": "(146.4, 76.2)",
+            "cost": 0.759,
+            "confidence": 0.747,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "e2",
+            "position": "(145.3, 57.3)",
+            "cost": 0.814,
+            "confidence": 0.729,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "d5",
+            "position": "(124.3, 136.3)",
+            "cost": 1.078,
+            "confidence": 0.641,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteKnight",
+            "square": "f6",
+            "position": "(162.9, 172.8)",
+            "cost": 0.854,
+            "confidence": 0.715,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteKnight",
+            "square": "f3",
+            "position": "(156.2, 71.0)",
+            "cost": 1.143,
+            "confidence": 0.619,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteKing",
+            "square": "e5",
+            "position": "(151.2, 130.5)",
+            "cost": 1.035,
+            "confidence": 0.655,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteBishop",
+            "square": "f5",
+            "position": "(157.8, 150.6)",
+            "cost": 1.039,
+            "confidence": 0.654,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteBishop",
+            "square": "g3",
+            "position": "(153.9, 90.6)",
+            "cost": 1.862,
+            "confidence": 0.379,
+            "quality": "Poor",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackRook",
+            "square": "c7",
+            "position": "(82.8, 184.2)",
+            "cost": 1.375,
+            "confidence": 0.542,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackRook",
+            "square": "c3",
+            "position": "(78.0, 80.2)",
+            "cost": 0.717,
+            "confidence": 0.761,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackQueen",
+            "square": "b4",
+            "position": "(72.9, 124.1)",
+            "cost": 1.34,
+            "confidence": 0.553,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "d7",
+            "position": "(95.0, 185.0)",
+            "cost": 1.417,
+            "confidence": 0.528,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "d6",
+            "position": "(94.2, 169.2)",
+            "cost": 1.181,
+            "confidence": 0.606,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "b7",
+            "position": "(93.7, 153.6)",
+            "cost": 2.08,
+            "confidence": 0.307,
+            "quality": "Poor",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "c5",
+            "position": "(92.6, 138.1)",
+            "cost": 1.053,
+            "confidence": 0.649,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "d4",
+            "position": "(92.1, 122.5)",
+            "cost": 1.254,
+            "confidence": 0.582,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "d3",
+            "position": "(91.0, 107.3)",
+            "cost": 1.508,
+            "confidence": 0.497,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "d2",
+            "position": "(90.2, 92.2)",
+            "cost": 1.74,
+            "confidence": 0.42,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "c2",
+            "position": "(89.4, 77.0)",
+            "cost": 1.447,
+            "confidence": 0.518,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackKnight",
+            "square": "c6",
+            "position": "(79.6, 170.2)",
+            "cost": 0.654,
+            "confidence": 0.782,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackKnight",
+            "square": "b3",
+            "position": "(76.4, 95.0)",
+            "cost": 1.476,
+            "confidence": 0.508,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackKing",
+            "square": "b5",
+            "position": "(72.1, 139.1)",
+            "cost": 1.239,
+            "confidence": 0.587,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackBishop",
+            "square": "b6",
+            "position": "(76.9, 153.8)",
+            "cost": 1.569,
+            "confidence": 0.477,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackBishop",
+            "square": "c4",
+            "position": "(74.8, 109.3)",
+            "cost": 0.775,
+            "confidence": 0.742,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          }
+        ],
+        "statistics": {
+          "total_assigned": 32,
+          "high_confidence": 6,
+          "medium_confidence": 23,
+          "low_confidence": 3,
+          "average_confidence": 0.587,
+          "average_cost": 1.238,
+          "ground_truth_available": 32,
+          "correct_assignments": 0,
+          "accuracy": 0.0
+        },
+        "summary": "Assignment Summary:\n\u2022 32 pieces successfully assigned\n\u2022 Average confidence: 0.587\n\u2022 High confidence assignments: 6\n\u2022 Accuracy: 0.0%\n\nQuality breakdown:\n\u2022 Good: 17\n\u2022 Fair: 12\n\u2022 Poor: 3\n"
+      }
+    },
+    {
+      "image_id": 5,
+      "pieces": 32,
+      "assignments": 32,
+      "assignment_rate": 1.0,
+      "detailed_results": {
+        "status": "success",
+        "assignments": [
+          {
+            "piece": "WhiteRook",
+            "square": "b2",
+            "position": "(44.2, 67.0)",
+            "cost": 1.229,
+            "confidence": 0.59,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhiteRook",
+            "square": "b7",
+            "position": "(44.2, 190.0)",
+            "cost": 1.196,
+            "confidence": 0.601,
+            "quality": "Good",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhiteQueen",
+            "square": "b5",
+            "position": "(43.1, 137.3)",
+            "cost": 0.807,
+            "confidence": 0.731,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c2",
+            "position": "(69.2, 68.2)",
+            "cost": 1.314,
+            "confidence": 0.562,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c3",
+            "position": "(69.2, 85.6)",
+            "cost": 1.03,
+            "confidence": 0.657,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c4",
+            "position": "(69.2, 102.8)",
+            "cost": 1.062,
+            "confidence": 0.646,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c5",
+            "position": "(69.2, 137.1)",
+            "cost": 1.04,
+            "confidence": 0.653,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "d5",
+            "position": "(69.2, 154.4)",
+            "cost": 1.658,
+            "confidence": 0.447,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c6",
+            "position": "(69.2, 171.8)",
+            "cost": 1.021,
+            "confidence": 0.66,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c7",
+            "position": "(69.2, 189.2)",
+            "cost": 1.279,
+            "confidence": 0.574,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "d4",
+            "position": "(115.8, 119.9)",
+            "cost": 0.956,
+            "confidence": 0.681,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteKnight",
+            "square": "b3",
+            "position": "(43.4, 83.4)",
+            "cost": 0.698,
+            "confidence": 0.767,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteKnight",
+            "square": "b6",
+            "position": "(43.4, 172.4)",
+            "cost": 0.754,
+            "confidence": 0.749,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteKing",
+            "square": "b4",
+            "position": "(42.9, 119.9)",
+            "cost": 0.813,
+            "confidence": 0.729,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteBishop",
+            "square": "a4",
+            "position": "(44.7, 102.8)",
+            "cost": 1.471,
+            "confidence": 0.51,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteBishop",
+            "square": "a5",
+            "position": "(44.7, 154.4)",
+            "cost": 1.477,
+            "confidence": 0.508,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackRook",
+            "square": "g2",
+            "position": "(210.8, 67.0)",
+            "cost": 1.227,
+            "confidence": 0.591,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackRook",
+            "square": "g7",
+            "position": "(210.8, 190.0)",
+            "cost": 1.194,
+            "confidence": 0.602,
+            "quality": "Good",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackQueen",
+            "square": "g5",
+            "position": "(211.9, 137.3)",
+            "cost": 0.78,
+            "confidence": 0.74,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "e4",
+            "position": "(162.6, 119.9)",
+            "cost": 1.243,
+            "confidence": 0.586,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f2",
+            "position": "(185.8, 68.2)",
+            "cost": 1.306,
+            "confidence": 0.565,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f3",
+            "position": "(185.8, 85.6)",
+            "cost": 1.004,
+            "confidence": 0.665,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f4",
+            "position": "(185.8, 102.8)",
+            "cost": 1.039,
+            "confidence": 0.654,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f5",
+            "position": "(185.8, 137.1)",
+            "cost": 1.016,
+            "confidence": 0.661,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "e5",
+            "position": "(186.1, 154.4)",
+            "cost": 1.647,
+            "confidence": 0.451,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f6",
+            "position": "(185.8, 171.8)",
+            "cost": 0.995,
+            "confidence": 0.668,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f7",
+            "position": "(185.8, 189.2)",
+            "cost": 1.269,
+            "confidence": 0.577,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackKnight",
+            "square": "g3",
+            "position": "(211.6, 83.4)",
+            "cost": 0.685,
+            "confidence": 0.772,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackKnight",
+            "square": "g6",
+            "position": "(211.6, 172.4)",
+            "cost": 0.741,
+            "confidence": 0.753,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackKing",
+            "square": "g4",
+            "position": "(212.1, 119.9)",
+            "cost": 0.787,
+            "confidence": 0.738,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackBishop",
+            "square": "h4",
+            "position": "(210.3, 102.8)",
+            "cost": 1.486,
+            "confidence": 0.505,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackBishop",
+            "square": "h5",
+            "position": "(210.3, 154.2)",
+            "cost": 1.491,
+            "confidence": 0.503,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          }
+        ],
+        "statistics": {
+          "total_assigned": 32,
+          "high_confidence": 8,
+          "medium_confidence": 24,
+          "low_confidence": 0,
+          "average_confidence": 0.628,
+          "average_cost": 1.116,
+          "ground_truth_available": 32,
+          "correct_assignments": 0,
+          "accuracy": 0.0
+        },
+        "summary": "Assignment Summary:\n\u2022 32 pieces successfully assigned\n\u2022 Average confidence: 0.628\n\u2022 High confidence assignments: 8\n\u2022 Accuracy: 0.0%\n\nQuality breakdown:\n\u2022 Fair: 13\n\u2022 Good: 19\n"
+      }
+    },
+    {
+      "image_id": 10,
+      "pieces": 32,
+      "assignments": 32,
+      "assignment_rate": 1.0,
+      "detailed_results": {
+        "status": "success",
+        "assignments": [
+          {
+            "piece": "WhiteRook",
+            "square": "b2",
+            "position": "(44.2, 67.0)",
+            "cost": 1.229,
+            "confidence": 0.59,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhiteRook",
+            "square": "b7",
+            "position": "(44.2, 190.0)",
+            "cost": 1.196,
+            "confidence": 0.601,
+            "quality": "Good",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhiteQueen",
+            "square": "b5",
+            "position": "(43.1, 137.3)",
+            "cost": 0.807,
+            "confidence": 0.731,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c2",
+            "position": "(69.2, 68.2)",
+            "cost": 1.314,
+            "confidence": 0.562,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c3",
+            "position": "(69.2, 85.6)",
+            "cost": 1.03,
+            "confidence": 0.657,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c4",
+            "position": "(69.2, 102.8)",
+            "cost": 1.062,
+            "confidence": 0.646,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c5",
+            "position": "(69.2, 154.4)",
+            "cost": 1.07,
+            "confidence": 0.643,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c6",
+            "position": "(69.2, 171.8)",
+            "cost": 1.021,
+            "confidence": 0.66,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "c7",
+            "position": "(69.2, 189.2)",
+            "cost": 1.279,
+            "confidence": 0.574,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "d4",
+            "position": "(115.8, 119.9)",
+            "cost": 0.956,
+            "confidence": 0.681,
+            "quality": "Good",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "WhitePawn",
+            "square": "d5",
+            "position": "(115.8, 137.1)",
+            "cost": 0.942,
+            "confidence": 0.686,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteKnight",
+            "square": "b3",
+            "position": "(43.4, 83.4)",
+            "cost": 0.698,
+            "confidence": 0.767,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteKnight",
+            "square": "b6",
+            "position": "(43.4, 172.4)",
+            "cost": 0.754,
+            "confidence": 0.749,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteKing",
+            "square": "b4",
+            "position": "(42.9, 119.9)",
+            "cost": 0.813,
+            "confidence": 0.729,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteBishop",
+            "square": "a4",
+            "position": "(44.7, 102.8)",
+            "cost": 1.471,
+            "confidence": 0.51,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "WhiteBishop",
+            "square": "a5",
+            "position": "(44.7, 154.4)",
+            "cost": 1.477,
+            "confidence": 0.508,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackRook",
+            "square": "g2",
+            "position": "(210.8, 67.0)",
+            "cost": 1.227,
+            "confidence": 0.591,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackRook",
+            "square": "g7",
+            "position": "(210.8, 190.0)",
+            "cost": 1.194,
+            "confidence": 0.602,
+            "quality": "Good",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackQueen",
+            "square": "g5",
+            "position": "(211.9, 137.3)",
+            "cost": 0.78,
+            "confidence": 0.74,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "e4",
+            "position": "(162.6, 119.9)",
+            "cost": 1.243,
+            "confidence": 0.586,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f2",
+            "position": "(185.8, 68.2)",
+            "cost": 1.306,
+            "confidence": 0.565,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "WhitePawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f3",
+            "position": "(185.8, 85.6)",
+            "cost": 1.004,
+            "confidence": 0.665,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f4",
+            "position": "(185.8, 102.8)",
+            "cost": 1.039,
+            "confidence": 0.654,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f5",
+            "position": "(185.8, 137.1)",
+            "cost": 1.016,
+            "confidence": 0.661,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "e5",
+            "position": "(186.1, 154.4)",
+            "cost": 1.647,
+            "confidence": 0.451,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f6",
+            "position": "(185.8, 171.8)",
+            "cost": 0.995,
+            "confidence": 0.668,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackPawn",
+            "square": "f7",
+            "position": "(185.8, 189.2)",
+            "cost": 1.269,
+            "confidence": 0.577,
+            "quality": "Fair",
+            "piece_confidence": 1.0,
+            "ground_truth": "BlackPawn1",
+            "correct": false
+          },
+          {
+            "piece": "BlackKnight",
+            "square": "g3",
+            "position": "(211.6, 83.4)",
+            "cost": 0.685,
+            "confidence": 0.772,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackKnight",
+            "square": "g6",
+            "position": "(211.6, 172.4)",
+            "cost": 0.741,
+            "confidence": 0.753,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackKing",
+            "square": "g4",
+            "position": "(212.1, 119.9)",
+            "cost": 0.787,
+            "confidence": 0.738,
+            "quality": "Good",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackBishop",
+            "square": "h4",
+            "position": "(210.3, 102.8)",
+            "cost": 1.486,
+            "confidence": 0.505,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          },
+          {
+            "piece": "BlackBishop",
+            "square": "h5",
+            "position": "(210.3, 154.2)",
+            "cost": 1.491,
+            "confidence": 0.503,
+            "quality": "Fair",
+            "piece_confidence": 1.0
+          }
+        ],
+        "statistics": {
+          "total_assigned": 32,
+          "high_confidence": 8,
+          "medium_confidence": 24,
+          "low_confidence": 0,
+          "average_confidence": 0.635,
+          "average_cost": 1.095,
+          "ground_truth_available": 32,
+          "correct_assignments": 0,
+          "accuracy": 0.0
+        },
+        "summary": "Assignment Summary:\n\u2022 32 pieces successfully assigned\n\u2022 Average confidence: 0.635\n\u2022 High confidence assignments: 8\n\u2022 Accuracy: 0.0%\n\nQuality breakdown:\n\u2022 Fair: 12\n\u2022 Good: 20\n"
+      }
+    }
+  ],
+  "configuration": {
+    "cost_threshold": 3.0,
+    "optimized_weights": {
+      "distance": 0.5,
+      "overlap": 1.0,
+      "piece_type": 0.3,
+      "board_edge": 0.2,
+      "collision": 5.0
+    }
+  }
+}

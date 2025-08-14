@@ -1,0 +1,1 @@
+# Chess Piece Mapper Package

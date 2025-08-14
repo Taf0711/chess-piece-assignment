@@ -1,0 +1,323 @@
+{
+  "timestamp": "2025-08-09T22:51:48.005556",
+  "test_name": "final_50_percent_push",
+  "target_accuracy": 0.5,
+  "achieved_accuracy": 0.12395833333333334,
+  "target_reached": false,
+  "progress_percentage": 24.791666666666668,
+  "status": "\ud83d\udcca PROGRESS MADE",
+  "best_individual_accuracy": 0.25,
+  "successful_tests": 30,
+  "total_tests": 30,
+  "detailed_results": [
+    {
+      "image_id": 0,
+      "image_filename": "images/000000.png",
+      "accuracy": 0.09375,
+      "correct": 3,
+      "total": 32,
+      "assignments_made": 6,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 1,
+      "image_filename": "images/000001.png",
+      "accuracy": 0.03125,
+      "correct": 1,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 2,
+      "image_filename": "images/000002.png",
+      "accuracy": 0.1875,
+      "correct": 6,
+      "total": 32,
+      "assignments_made": 8,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 3,
+      "image_filename": "images/000003.png",
+      "accuracy": 0.21875,
+      "correct": 7,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 4,
+      "image_filename": "images/000004.png",
+      "accuracy": 0.03125,
+      "correct": 1,
+      "total": 32,
+      "assignments_made": 10,
+      "pieces_detected": 31,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 5,
+      "image_filename": "images/000005.png",
+      "accuracy": 0.09375,
+      "correct": 3,
+      "total": 32,
+      "assignments_made": 6,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 6,
+      "image_filename": "images/000006.png",
+      "accuracy": 0.0625,
+      "correct": 2,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 7,
+      "image_filename": "images/000007.png",
+      "accuracy": 0.21875,
+      "correct": 7,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 8,
+      "image_filename": "images/000008.png",
+      "accuracy": 0.21875,
+      "correct": 7,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 9,
+      "image_filename": "images/000009.png",
+      "accuracy": 0.03125,
+      "correct": 1,
+      "total": 32,
+      "assignments_made": 10,
+      "pieces_detected": 31,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 10,
+      "image_filename": "images/000010.png",
+      "accuracy": 0.125,
+      "correct": 4,
+      "total": 32,
+      "assignments_made": 7,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 11,
+      "image_filename": "images/000011.png",
+      "accuracy": 0.0625,
+      "correct": 2,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 12,
+      "image_filename": "images/000012.png",
+      "accuracy": 0.21875,
+      "correct": 7,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 13,
+      "image_filename": "images/000013.png",
+      "accuracy": 0.1875,
+      "correct": 6,
+      "total": 32,
+      "assignments_made": 8,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 14,
+      "image_filename": "images/000014.png",
+      "accuracy": 0.03125,
+      "correct": 1,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 31,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 15,
+      "image_filename": "images/000015.png",
+      "accuracy": 0.125,
+      "correct": 4,
+      "total": 32,
+      "assignments_made": 7,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 16,
+      "image_filename": "images/000016.png",
+      "accuracy": 0.0625,
+      "correct": 2,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 17,
+      "image_filename": "images/000017.png",
+      "accuracy": 0.21875,
+      "correct": 7,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 18,
+      "image_filename": "images/000018.png",
+      "accuracy": 0.1875,
+      "correct": 6,
+      "total": 32,
+      "assignments_made": 8,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 19,
+      "image_filename": "images/000019.png",
+      "accuracy": 0.03125,
+      "correct": 1,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 31,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 20,
+      "image_filename": "images/000020.png",
+      "accuracy": 0.125,
+      "correct": 4,
+      "total": 32,
+      "assignments_made": 7,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 21,
+      "image_filename": "images/000021.png",
+      "accuracy": 0.0625,
+      "correct": 2,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 22,
+      "image_filename": "images/000022.png",
+      "accuracy": 0.21875,
+      "correct": 7,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 23,
+      "image_filename": "images/000023.png",
+      "accuracy": 0.1875,
+      "correct": 6,
+      "total": 32,
+      "assignments_made": 8,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 24,
+      "image_filename": "images/000024.png",
+      "accuracy": 0.03125,
+      "correct": 1,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 25,
+      "image_filename": "images/000025.png",
+      "accuracy": 0.125,
+      "correct": 4,
+      "total": 32,
+      "assignments_made": 7,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 26,
+      "image_filename": "images/000026.png",
+      "accuracy": 0.0625,
+      "correct": 2,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 27,
+      "image_filename": "images/000027.png",
+      "accuracy": 0.25,
+      "correct": 8,
+      "total": 32,
+      "assignments_made": 10,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 28,
+      "image_filename": "images/000028.png",
+      "accuracy": 0.1875,
+      "correct": 6,
+      "total": 32,
+      "assignments_made": 8,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 29,
+      "image_filename": "images/000029.png",
+      "accuracy": 0.03125,
+      "correct": 1,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    }
+  ],
+  "algorithm_improvements": [
+    "Multi-pass assignment algorithm (exact \u2192 color \u2192 distance)",
+    "Advanced cost function with exponential distance penalty",
+    "Strong piece-type matching bonuses (-3.0 for exact match)",
+    "Chess-specific positional logic for each piece type",
+    "Confidence-based assignment weighting",
+    "Strict cost thresholds per assignment pass",
+    "Comprehensive visualization with pass breakdown"
+  ]
+}

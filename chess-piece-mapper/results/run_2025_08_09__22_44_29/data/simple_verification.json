@@ -1,0 +1,9 @@
+{
+  "timestamp": "2025-08-09T22:44:29.446526",
+  "test_type": "Simple data verification",
+  "data_path": "/home/pre/projects/chess-datagen/gen-data/render_src/coco_data_2025_08_08__21_53_08",
+  "data_accessible": true,
+  "annotations_loaded": true,
+  "placements_loaded": true,
+  "status": "Data verification successful - ready for accuracy testing"
+}

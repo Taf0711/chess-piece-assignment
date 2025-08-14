@@ -1,0 +1,119 @@
+{
+  "timestamp": "2025-08-09T22:46:09.495658",
+  "test_type": "Basic coordinate-based accuracy test",
+  "method": "Closest square assignment with distance threshold",
+  "average_accuracy": 0.09375,
+  "successful_tests": 2,
+  "total_tests": 10,
+  "best_accuracy": 0.09375,
+  "worst_accuracy": 0.0,
+  "detailed_results": [
+    {
+      "image_id": 0,
+      "image_filename": "images/000000.png",
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 32,
+      "assignments_made": 6,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 1,
+      "image_filename": "images/000001.png",
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 32,
+      "assignments_made": 6,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 2,
+      "image_filename": "images/000002.png",
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 3,
+      "image_filename": "images/000003.png",
+      "accuracy": 0.09375,
+      "correct": 3,
+      "total": 32,
+      "assignments_made": 10,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 4,
+      "image_filename": "images/000004.png",
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 32,
+      "assignments_made": 14,
+      "pieces_detected": 31,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 5,
+      "image_filename": "images/000005.png",
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 32,
+      "assignments_made": 6,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 6,
+      "image_filename": "images/000006.png",
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 32,
+      "assignments_made": 6,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 7,
+      "image_filename": "images/000007.png",
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 32,
+      "assignments_made": 9,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 8,
+      "image_filename": "images/000008.png",
+      "accuracy": 0.09375,
+      "correct": 3,
+      "total": 32,
+      "assignments_made": 10,
+      "pieces_detected": 32,
+      "ground_truth_pieces": 32
+    },
+    {
+      "image_id": 9,
+      "image_filename": "images/000009.png",
+      "accuracy": 0.0,
+      "correct": 0,
+      "total": 32,
+      "assignments_made": 14,
+      "pieces_detected": 31,
+      "ground_truth_pieces": 32
+    }
+  ],
+  "notes": [
+    "This is a basic test using simple coordinate assignment",
+    "No complex warping or Hungarian algorithm optimization",
+    "Distance threshold: 48 pixels (1.5 squares)",
+    "Piece type normalization applied (removes variant numbers)",
+    "Tests first 10 images from training set"
+  ]
+}

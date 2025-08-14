@@ -1,0 +1,32 @@
+CHESS PIECE MAPPING RESULTS - IMAGE 17
+============================================================
+Accuracy: 13/32 = 40.6%
+Assignments made: 17
+Pieces detected: 32
+
+CHESS BOARD LAYOUT:
+  a b c d e f g h
+8 · ·   · · ✓ ✓ ✓  8
+7 · · · ·   ✓ ✓ ✓  7
+6   ·     ✓        6
+5                  5
+4       · ✗        4
+3 ·                3
+2   · ✓     ✓ ✓ ✓  2
+1 · · · ✓ ✓ ✓ ✓ ✓  1
+  a b c d e f g h
+
+Legend: ✓=Correct ✗=Wrong ·=Missing ?=Extra
+
+ASSIGNMENT DETAILS:
+  ✓ f2: WhitePawn2 (expected: WhitePawn1)
+  ✓ h2: WhitePawn2 (expected: WhitePawn1)
+  ✓ g1: WhiteKnight1 (expected: WhiteKnight1)
+  ✓ g2: WhitePawn2 (expected: WhitePawn1)
+  ✓ f1: WhiteBishop1 (expected: WhiteBishop1)
+  ✓ e6: BlackPawn3 (expected: BlackPawn1)
+  ✗ d1: WhiteRook1 (expected: WhiteQueen1)
+  ✗ h1: WhiteQueen1 (expected: WhiteRook1)
+  ✗ e4: BlackRook1 (expected: WhitePawn1)
+  ✓ h7: BlackPawn3 (expected: BlackPawn1)
+  ... and 7 more assignments
