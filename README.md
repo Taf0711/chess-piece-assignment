@@ -128,4 +128,4 @@ Processes around 10-15 images per second. Accuracy depends on image quality and 
 
 ## Note
 
-This codebase was derived from my friend's chess data generation repository. The piece assignment system was built on top of their existing chess rendering and data processing tools.
+This codebase was derived from Ishraq's chess-gen data generation repository. The piece assignment system was built on top of their existing chess rendering and data processing tools.
